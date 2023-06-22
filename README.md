@@ -1,0 +1,1 @@
+This is the frontend of our learning app platform. More details and documentations will be available soon.
