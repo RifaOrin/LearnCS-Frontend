@@ -1,4 +1,4 @@
-import './css/LandingPage.css'
+import './tailwindcss/input.css'
 function LandingPage(){
     return(
         <div>
