@@ -5,9 +5,9 @@ import ReactPlayer from 'react-player';
 function LandingPage(){
     return(
         <body className='m-0 p-0 box-border'>
-            <div className='container h-22 bg-[#00242C] px-28 py-0.25'>
+            <div className='container h-21 bg-[#00242C] px-28 py-0.25 fixed z-50'>
                 <nav className='flex items-center'>
-                    <img src={Logo} className='w-1/6 h-25 cursor-pointer'></img>
+                    <img src={Logo} className='w-1/6 h-21 cursor-pointer'></img>
                     <ul className='flex-1 text-right'>
                         <li className='list-none inline-block px-5'><a href='#' className='no-underline text-[#F2F2F2] text-lg font-semibold px-3 py-3 hover:border-2 hover:scale-105 duration-250 cursor-pointer' >Home</a></li>
                         <li className='list-none inline-block px-5'><a href='#' className='no-underline text-[#F2F2F2] text-lg font-semibold px-3 py-3 hover:border-2 hover:scale-105 duration-250 cursor-pointer'>About Us</a></li>
@@ -20,7 +20,7 @@ function LandingPage(){
                 </nav>
             </div>
 
-            <section className='showcase absolute right-0 w-full min-h-screen p-20 flex 
+            <section className='showcase right-0 w-full min-h-screen p-20 flex 
             justify-between items-center z-10 transition duration-1000 text-[#F2F2F2]'  >
             
               <video className='absolute top-0 left-0 w-full h-full object-cover opacity-50' src={video} autoPlay loop muted />
