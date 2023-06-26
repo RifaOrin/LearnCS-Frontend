@@ -12,8 +12,8 @@ function LandingPage(){
                         <li className='list-none inline-block px-5'><a href='#' className='no-underline text-[#F2F2F2] text-lg font-semibold px-3 py-3 hover:border-2 hover:scale-105 duration-250 cursor-pointer' >Home</a></li>
                         <li className='list-none inline-block px-5'><a href='#' className='no-underline text-[#F2F2F2] text-lg font-semibold px-3 py-3 hover:border-2 hover:scale-105 duration-250 cursor-pointer'>About Us</a></li>
                         <li className='list-none inline-block px-5'><a href='#' className='no-underline text-[#F2F2F2] text-lg font-semibold px-3 py-3 hover:border-2 hover:scale-105 duration-250 cursor-pointer'>Contact</a></li>
-                        <button type='button' className='text-[#7ED98B] inline-block text-lg font-semibold px-5'>Log In</button>
-                        <button type='button' className='text-[#7ED98B] inline-block text-lg font-semibold px-5'>Sign Up</button>
+                        <button type='button' className='text-[#7ED98B] hover:text-[#498C60] inline-block text-lg font-semibold px-5'>Log In</button>
+                        <button type='button' className='text-[#7ED98B] hover:text-[#498C60] inline-block text-lg font-semibold px-5'>Sign Up</button>
                     </ul>
                     
 
