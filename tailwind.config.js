@@ -18,6 +18,7 @@ module.exports = {
     extend: {
       letterSpacing: ['hover', 'focus'],
       transitionProperty: ['responsive', 'motion-safe', 'motion-reduce']
+      
 
     },
   },
