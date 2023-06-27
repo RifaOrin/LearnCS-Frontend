@@ -1,4 +1,5 @@
 import LandingPage from "./LandingPage";
+import Course from "./courses";
 import {
   BrowserRouter as Router,
   Routes,
@@ -11,7 +12,11 @@ function App() {
       <Router>
       <Routes>
           <Route path="/" element={<LandingPage/>}></Route>
-        </Routes>
+      </Routes>
+
+      <Routes>
+          <Route path="/courses" element={<Course/>}></Route>
+      </Routes>
       </Router>
     </div>
   );
