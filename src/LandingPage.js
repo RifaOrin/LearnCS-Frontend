@@ -3,6 +3,7 @@ import Logo from './images/default1.png';
 import video from './images/course-video.mp4'
 import { useState } from 'react';
 import Searchbar from './searchbar';
+import Signup from './signup';
 function LandingPage(){
       const [showSearchbar, setShowSearchbar] = useState(false);
       const toggleSearchbar = () => {
@@ -49,9 +50,12 @@ function LandingPage(){
             
             </section>
 
+            <Signup />
+
             
             
         </body>
+
     );
 }
 export default LandingPage;
