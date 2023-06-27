@@ -4,53 +4,53 @@ function Signup() {
       <div className="h-screen flex items-center justify-center bg-[#748A8C]">
         <div className="mr-56 max-w-sm mx-auto p-8 bg-[#012326] rounded-xl shadow-md space-y-2 flex-auto">
           <div className="text-center space-y-2 sm:text-left">
-            <h1 className="mb-4 text-lg text-center font-semibold text-gray-300">
+            <h1 className="mb-4 text-base text-center font-semibold text-[#F2F2F2]">
               Register your free account and get immidiate access to online
               courses
             </h1>
-            <div className="border-t border-gray-300 my-4"></div>
+            <div className="border-t border-[#F2F2F2] my-4"></div>
           </div>
           <div>
-            <p className="text-body py-2 text-gray-500 font-medium dark:text-gray-400">
+            <p className="text-body py-2 text-[#748A8C] font-medium">
               Username
             </p>
             <input
               type="text"
               placeholder="Username"
-              class="border border-gray-400 py-1 px-2"
+              class="w-full rounded-sm border border-[#F2F2F2] py-1 px-2"
             ></input>
-            <p className="text-body py-2 text-gray-500 font-medium dark:text-gray-400">
-              Email
+            <p className="text-body py-2 text-[#748A8C] font-medium ">
+              Email Address
             </p>
             <input
               type="text"
-              placeholder="Email"
-              class="border border-gray-400 py-1 px-2"
+              placeholder="Email Address"
+              class="w-full rounded-sm border border-[#F2F2F2] py-1 px-2"
             ></input>
-            <p className="text-body py-2 text-gray-500 font-medium dark:text-gray-400">
+            <p className="text-body py-2 text-[#748A8C] font-medium ">
               Password
             </p>
             <input
               type="text"
               placeholder="Password"
-              class="border border-gray-400 py-1 px-2"
+              class="w-full rounded-sm  border border-[#F2F2F2] py-1 px-2"
             ></input>
-            <p className="text-body py-2 text-gray-500 font-medium dark:text-gray-400">
+            <p className="text-body py-2 text-[#748A8C] font-medium ">
               Confirm Password
             </p>
             <input
               type="text"
               placeholder="Confirm Password"
-              class="border border-gray-400 py-1 px-2"
+              class="w-full rounded-sm border border-[#F2F2F2] py-1 px-2"
             ></input>
             <div class="mt-5">
               <button
-                className="w-full py-3 text-center border rounded-full text-sm font-semibold  hover:text-white hover:border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2
-         border-green-400 text-[#49ad62] hover:bg-green-500 focus:ring-green-600 dark:text-green-400"
+                className="w-full py-3 text-center border rounded-full text-sm font-semibold  hover:text-[#F2F2F2] hover:border-transparent focus:outline-none focus:ring-2 focus:ring-offset-2
+         border-[#5ba66e] text-[#49ad62] hover:bg-green-500 focus:ring-green-600 dark:text-green-400"
               >
                 Sign Up
               </button>
-              <p className="text-body text-center py-2 text-white font-medium">
+              <p className="text-body text-center py-2 text-[#F2F2F2] font-medium">
                 Already a Member?
                 <button className="text-green-400 px-1 hover:underline">
                   Sign In
