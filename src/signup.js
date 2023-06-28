@@ -17,7 +17,7 @@ function Signup() {
             <input
               type="text"
               placeholder="Username"
-              class="border outline-none focus:border-2 focus:border-green-500 w-full rounded-sm py-1 px-2"
+              class="border outline-none focus:border-2 focus:border-green-500 w-full rounded-sm py-2 px-3"
             ></input>
             <p className="text-body py-2 text-[#F2F2F2] font-medium ">
               Email Address
@@ -25,7 +25,7 @@ function Signup() {
             <input
               type="text"
               placeholder="Email Address"
-              class="border outline-none focus:border-2 focus:border-green-500 w-full rounded-sm py-1 px-2"
+              class="border outline-none focus:border-2 focus:border-green-500 w-full rounded-sm py-2 px-3"
             ></input>
             <p className="text-body py-2 text-[#F2F2F2] font-medium ">
               Password
@@ -33,7 +33,7 @@ function Signup() {
             <input
               type="text"
               placeholder="Password"
-              class="w-full rounded-sm border outline-none focus:border-2 focus:border-green-500 py-1 px-2"
+              class="w-full rounded-sm border outline-none focus:border-2 focus:border-green-500 py-2 px-3"
             ></input>
             <p className="text-body py-2 text-[#F2F2F2] font-medium ">
               Confirm Password
@@ -41,7 +41,7 @@ function Signup() {
             <input
               type="text"
               placeholder="Confirm Password"
-              class="w-full rounded-sm border outline-none focus:border-2 focus:border-green-500 py-1 px-2"
+              class="w-full rounded-sm border outline-none focus:border-2 focus:border-green-500 py-2 px-3"
             ></input>
             <div class="mt-5">
               <button
@@ -50,7 +50,12 @@ function Signup() {
               >
                 Sign Up
               </button>
-              <p className="text-body text-center py-2 text-[#F2F2F2] font-medium">
+                <div className="mt-5 grid grid-cols-3 items-center text-gray-300">
+                    <hr className="border-gray-400"></hr>
+                    <p className="text-center text-sm cursor-pointer">OR</p>
+                    <hr className="border-gray-400"></hr>
+                </div>
+              <p className="mt-2 text-body text-center py-2 text-[#F2F2F2] font-medium">
                 Already a Member?
                 <button className="text-green-400 px-1 hover:underline">
                   Sign In
