@@ -57,7 +57,7 @@ function Contact(){
                                         <label for="">Message</label>
                                         <textarea placeholder='Message' rows='4' className='ring-1 ring-gray-300 w-full rounded-md px-4 py-2 mt-2 outline-none focus:ring-2 focus:ring-[#05F26C]'></textarea>
                                     </div>
-                                    <button className='inline-block self-end bg-[#498C60] hover:bg-[#7ED98B] hover:text-gray-600 text-white font-bold rounded-lg px-6 py-2 uppercase text-sm'>Send Message</button>
+                                    <button className='inline-block self-end bg-[#498C60] hover:bg-[#7ED98B] hover:text-gray-600 hover:scale-105 duration-300 text-white font-bold rounded-lg px-6 py-2 uppercase text-sm'>Send Message</button>
                                 </form>
                             </div>
                         </div>

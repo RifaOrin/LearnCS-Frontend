@@ -2,6 +2,7 @@ import LandingPage from "./LandingPage";
 import Course from "./courses";
 import Signup from "./signup";
 import Contact from "./contactUs";
+import Login from "./login";
 import {
   BrowserRouter as Router,
   Routes,
@@ -24,6 +25,9 @@ function App() {
       </Routes>
       <Routes>
           <Route path="/contact" element={<Contact/>}></Route>
+      </Routes>
+      <Routes>
+          <Route path="/login" element={<Login/>}></Route>
       </Routes>
       </Router>
     </div>
