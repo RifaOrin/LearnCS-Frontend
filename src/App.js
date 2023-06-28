@@ -7,30 +7,27 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Switch,
+  Link,
 } from "react-router-dom";
 
 function App() {
   return (
+    <Router>
     <div className="App">
-      <Router>
       <Routes>
           <Route path="/" element={<LandingPage/>}></Route>
-      </Routes>
 
-      <Routes>
           <Route path="/courses" element={<Course/>}></Route>
-      </Routes>
-      <Routes>
+
           <Route path="/signup" element={<Signup/>}></Route>
-      </Routes>
-      <Routes>
+
           <Route path="/contact" element={<Contact/>}></Route>
-      </Routes>
-      <Routes>
+
           <Route path="/login" element={<Login/>}></Route>
       </Routes>
-      </Router>
     </div>
+    </Router>
   );
 }
 
