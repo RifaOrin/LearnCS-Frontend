@@ -14,14 +14,14 @@ function LandingPage() {
     };
     return (
         <body>
-            <div className="container h-21 bg-[#00242cc9] px-28 py-0.25 absolute z-20">
+            <div className="container h-21 w-full bg-[#00242cc9] px-28 py-0.25  absolute z-20">
                 <nav className="flex items-center">
                     <img src={Logo} className="w-1/6 h-21 cursor-pointer"></img>
                     <ul className="flex-1 text-right">
                         <li className="list-none inline-block px-5">
                             <Link
                                 to="/"
-                                className="no-underline text-[#F2F2F2] text-lg font-semibold px-3 py-3 hover:border-2 hover:scale-105 duration-250 cursor-pointer"
+                                className="no-underline text-[#F2F2F2] text-lg font-semibold px-3 py-3  hover:border-2 hover:scale-105 duration-250 cursor-pointer"
                             >
                                 Home
                             </Link>
@@ -42,22 +42,27 @@ function LandingPage() {
                                 Contact
                             </Link>
                         </li>
-                        <Link to="./login" >
-                        <button
-                            type="button"
-                            className="text-[#7ED98B] hover:text-[#498C60] inline-block text-lg font-semibold px-5"
-                        >
-                            Log In
-                        </button>
-                        </Link>
-                        <Link to = "./signup">
-                        <button
-                            type="button"
-                            className="text-[#7ED98B] hover:text-[#498C60] inline-block text-lg font-semibold pl-5 pr-6"
-                        >
-                            Sign Up
-                        </button>
-                        </Link>
+                        <li className="list-none inline-block px-5">
+                            <Link to="./login" >
+                                <button
+                                type="button"
+                                className="text-[#7ED98B] hover:text-[#498C60] inline-block text-lg font-semibold px-3 py-3"
+                                >
+                                Log In
+                                </button>
+                            </Link>
+                        </li>
+                        <li className="list-none inline-block px-5">
+                            <Link to = "./signup">
+                                <button
+                                type="button"
+                                className="text-[#7ED98B] hover:text-[#498C60] inline-block text-lg font-semibold px-3 py-3"
+                                >
+                                Sign Up
+                                </button>
+                            </Link>
+                        </li>
+                        
                     </ul>
 
                     <Searchbar />
@@ -78,10 +83,10 @@ function LandingPage() {
                 <div className="overlay absolute top-0 left-0 w-full h-full bg-overlay blend-screen"></div>
 
                 <div className="text relative">
-                    <h2 className="text-7xl  my-5 font-extrabold uppercase 2xl:text-4xl">
+                    <h2 className="text-4xl  my-5 font-extrabold uppercase 2xl:text-5xl">
                         Unlock the world of CS
                     </h2>
-                    <h3 className="text-5xl my-5 font-bold max-w-2xl 2xl:text-3xl">
+                    <h3 className="text-3xl my-5 font-bold max-w-2xl 2xl:text-4xl">
                         Knowledge with LearnCS
                     </h3>
                     <p className="max-w-2xl my-5 text-base font-normal leading-7">
@@ -102,8 +107,9 @@ function LandingPage() {
                 </div>
             </section>
             <Courses />
-
+            
             <Signup />
+            
         </body>
     );
 }
