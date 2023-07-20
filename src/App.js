@@ -3,6 +3,7 @@ import Course from "./courses";
 import Signup from "./signup";
 import Contact from "./contactUs";
 import Login from "./login";
+import CourseDetails from './courseDetails';
 import {
   BrowserRouter as Router,
   Routes,
@@ -25,6 +26,8 @@ function App() {
           <Route path="/contact" element={<Contact/>}></Route>
 
           <Route path="/login" element={<Login/>}></Route>
+
+          <Route path="/courseDetails/:id" element={<CourseDetails/>}></Route>
       </Routes>
     </div>
     </Router>
