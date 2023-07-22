@@ -14,7 +14,7 @@ function LandingPage() {
     };
     return (
         <body>
-            <div className="container h-21 w-full bg-[#00242cc9] px-28 py-0.25  absolute z-20">
+            <div className="container h-21 w-full bg-[#00242cc9] pl-16 pr-10 py-0.25  absolute z-20">
                 <nav className="flex items-center">
                     <img src={Logo} className="w-1/6 h-21 cursor-pointer"></img>
                     <ul className="flex-1 text-right">
