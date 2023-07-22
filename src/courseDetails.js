@@ -160,7 +160,7 @@ function CourseDetails() {
                                      icon={chevronDownOutline} className="text-xl"/>
                                 </div>
                                 </div>
-                                <div className="pr-5 border-solid border-1 border-gray-300"> 
+                                <div className="pr-5 border-solid border-2 border-gray-300"> 
                                 {expandedModuleId === id && (
                                    
                                     <div className="flex flex-col" >
