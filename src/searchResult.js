@@ -15,13 +15,13 @@ function SearchResult() {
         });
     });
     return (
-        <body className="bg-[#012326] ">
+        <body className="bg-[#012326] min-h-screen">
             <div className="course-container max-w-5xl mx-auto my-0 px-20 py-20 bg-[#012326]">
                 <h2
-                    className="course-heading font-poppins font-bold text-center text-white pb-7"
-                    style={{ fontSize: "3rem" }}
+                    className="course-heading font-poppins font-bold text-center text-white text-4xl pb-20"
+                    
                 >
-                    Searching result for - {searchValue}
+                    Searching result for - '{searchValue}'
                 </h2>
                 
                 <div className="course-list grid grid-cols-3 gap-3 -mx-3">
