@@ -9,7 +9,7 @@ function Searchbar({ history }) {
     };
 
     return (
-        <div className="max-w-md mx-auto px-3 py-3">
+        <div className="max-w-md mx-auto py-3">
             <div className="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-[#00242c8e] overflow-hidden">
                 <Link to={`/searchResult/${searchValue}`}>
                     <div className="grid place-items-center h-full w-12 text-gray-300">

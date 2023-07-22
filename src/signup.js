@@ -78,7 +78,7 @@ function Signup() {
                             Password
                         </p>
                         <input
-                            type="text"
+                            type="password"
                             placeholder="Password"
                             class="w-full rounded-sm border outline-none focus:border-2 focus:border-green-500 py-2 px-3"
                             onChange={(e) => setPassword(e.target.value)}
@@ -88,7 +88,7 @@ function Signup() {
                             Confirm Password
                         </p>
                         <input
-                            type="text"
+                            type="password"
                             placeholder="Confirm Password"
                             class="w-full rounded-sm border outline-none focus:border-2 focus:border-green-500 py-2 px-3"
                             onChange={(e) => setRe_Password(e.target.value)}
