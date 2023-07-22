@@ -117,7 +117,7 @@ function CourseDetails() {
                 
                 <div className=" max-w-sm p-10 ml-10 mt-10 mr-20 border border-gray-200 rounded-lg shadow">
                     <h2 className="mb-2 pb-3 text-2xl font-bold tracking-tight text-gray-900">$33.08</h2>
-                    <a className="px-7 py-3 text-sm font-bold text-center text-white bg-[#4f975a] rounded-sm hover:bg-[#316439]" href="">Buy Now</a>
+                    <a className="px-7 py-3 sm:px-3 sm:py-2 text-sm font-bold text-center text-white bg-[#4f975a] rounded-sm hover:bg-[#316439]" href="">Buy Now</a>
                     <p className="text-xs font-medium text-gray-500 pt-5">Aren't member?</p>
                     <p className="text-xs font-semibold underline text-[#4f975a]">Join for free</p>
 
@@ -128,7 +128,7 @@ function CourseDetails() {
                 <div className="w-3/4 pl-40 pt-5">
                     <div className="mt-5 pr-5 pb-3 border-solid border-2 border-gray-300">
                     <h2 className="text-2xl font-semibold pt-5 pl-5 mb-3">Skills you'll achieve</h2>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-1">
                     {skills.split(", ").map((item, index) => (
                         <div className='inline-flex space-x-2 pl-4'>
                         <IonIcon icon={checkmarkOutline} className="text-xl"/>
