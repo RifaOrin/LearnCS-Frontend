@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { IonIcon } from "@ionic/react";
 import {
@@ -71,6 +71,11 @@ function CourseDetails() {
         axios.get(baseUrl + id + "/module").then((response) => {
             setModule(response.data);
         });
+        const element = document.getElementById('courseDetailsStart');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+
     }, []);
 
     useEffect(() => {
@@ -103,7 +108,7 @@ function CourseDetails() {
     // }
 
     return (
-        <div>
+        <div id="courseDetailsStart">
             <div className="w-full flex flex-row bg-[#012326] pb-5">
                 <div className="pl-40 w-3/4 pt-20 pr-10 text-white">
                     <h1 className="text-4xl font-bold mb-5">{title}</h1>
@@ -132,7 +137,7 @@ function CourseDetails() {
             </div>
             <div className="flex flex-row">
                 <div className="w-3/4 pl-40 pt-5">
-                    <div className="mt-5 pr-5 border-solid border-2 border-gray-300">
+                    <div className="mt-5 pr-5 border-solid border-2 border-gray-300 shadow-md">
                         <h2 className="text-2xl font-semibold pt-5 pl-5 mb-3">
                             What you'll learn
                         </h2>
@@ -151,7 +156,7 @@ function CourseDetails() {
                     </div>
                 </div>
 
-                <div className=" max-w-sm p-10 ml-10 mt-10 mr-20 border border-gray-200 rounded-lg shadow">
+                <div className=" max-w-sm p-10 ml-10 mt-10 mr-20 border border-gray-200 rounded-lg shadow-lg">
                     <h2 className="mb-2 pb-3 text-2xl font-bold tracking-tight text-gray-900">
                         $33.08
                     </h2>
@@ -164,14 +169,16 @@ function CourseDetails() {
                     <p className="text-xs font-medium text-gray-500 pt-5">
                         Aren't member?
                     </p>
+                    <Link to = "/signup">
                     <p className="text-xs font-semibold underline text-[#4f975a]">
                         Join for free
                     </p>
+                    </Link>
                 </div>
             </div>
 
             <div className="w-3/4 pl-40 pt-5">
-                <div className="mt-5 pr-5 pb-3 border-solid border-2 border-gray-300">
+                <div className="mt-5 pr-5 pb-3 border-solid border-2 border-gray-300 shadow-md">
                     <h2 className="text-2xl font-semibold pt-5 pl-5 mb-3">
                         Skills you'll achieve
                     </h2>
@@ -271,7 +278,7 @@ function CourseDetails() {
             })}
 
             <div className="w-3/4 pl-40 pt-5">
-                <div className="mt-5 pr-5 mb-7 border-solid border-2 border-gray-300">
+                <div className="mt-5 pr-5 mb-7 border-solid border-2 border-gray-300 shadow-md">
                     <h2 className="text-2xl font-semibold pt-5 pl-5 pb-6">
                         Instructor
                     </h2>

@@ -122,7 +122,7 @@ function Courses() {
                             return (
                                 <div key={id}>
                                     <Link
-                                        to={`/courseDetails/${id}`}
+                                        to={`/courseDetails/${id}#courseDetailsStart`}
                                         className="card-link"
                                     >
                                         <div className="card">
