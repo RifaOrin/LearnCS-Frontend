@@ -6,13 +6,15 @@ const Url = "http://127.0.0.1:8000/auth/users/reset_password/";
 function ResetPass() {
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
+    const [showPopup, setShowPopup] = useState(false);
 
     const resetdata = async (e) => {
         e.preventDefault();
         try {
-            const resp = await axios.post(Url,{email,});
-            navigate("");
-        } catch(error) {
+            const resp = await axios.post(Url, { email });
+            //navigate("");
+            setShowPopup(true);
+        } catch (error) {
             if (error.response.data.email !== undefined) {
                 alert(error.response.data.email);
             }
@@ -41,7 +43,7 @@ function ResetPass() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                             />
-                            
+
                             <button
                                 className="bg-[#9D9477] rounded-xl text-[#1E2124] font-semibold py-2 hover:scale-105 duration-300"
                                 onClick={resetdata}
@@ -49,28 +51,6 @@ function ResetPass() {
                                 Send
                             </button>
                         </form>
-                        {/* <div className="mt-10 grid grid-cols-3 items-center text-gray-300">
-                            <hr className="border-gray-400"></hr>
-                            <p className="text-center text-sm cursor-pointer">
-                                OR
-                            </p>
-                            <hr className="border-gray-400"></hr>
-                        </div>
-
-                        <p className="mt-5 text-[#f3f7fa] text-xs underline cursor-pointer border-b border-gray-400 py-4">
-                            Forgot your password?
-                        </p>
-                        <div className="mt-3 text-xs flex justify-between items-center">
-                            <p className="text-[#f3f7fa] cursor-pointer">
-                                Don't Have An Account?
-                            </p>
-                            <Link
-                                className="text-[#c7bfa7] hover:underline font-semibold hover:scale-105 duration-200"
-                                to="/signup"
-                            >
-                                Sign Up
-                            </Link>
-                        </div> */}
                     </div>
                     {/*image */}
                     <div className="md:block hidden w-1/2">
@@ -78,6 +58,21 @@ function ResetPass() {
                     </div>
                 </div>
             </section>
+            {showPopup && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="bg-white rounded-lg p-8 max-w-sm mx-auto shadow-lg">
+                        <p className="text-center text-lg text-gray-800 font-semibold mb-4">
+                            Please check your email .
+                        </p>
+                        <button
+                            className="block w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded"
+                            onClick={() => setShowPopup(false)}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
         </body>
     );
 }
