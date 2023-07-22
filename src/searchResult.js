@@ -15,10 +15,10 @@ function SearchResult() {
         });
     });
     return (
-        <body className="bg-[#012326] min-h-screen">
-            <div className="course-container max-w-5xl mx-auto my-0 px-20 py-20 bg-[#012326]">
+        <body className="bg-[#F2F2F2] min-h-screen">
+            <div className="course-container max-w-5xl mx-auto my-0 px-20 py-20 bg-[#F2F2F2]">
                 <h2
-                    className="course-heading font-poppins font-bold text-center text-white text-4xl pb-20"
+                    className="course-heading font-poppins font-bold text-center text-[#012326] text-4xl pb-20"
                     
                 >
                     Searching result for - '{searchValue}'
