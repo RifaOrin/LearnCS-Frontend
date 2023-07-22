@@ -7,7 +7,7 @@ function Courses() {
     const [courses, setCourses] = useState([]);
     const [error, setError] = useState("");
     const [selectedCategory, setSelectedCategory] = useState(null);
-    //const [courseID, setCourseId] = useState(null);
+    // const [courseID, setCourseId] = useState(null);
     // const [instructor, setInstructor] = useState([]);
 
     // const instructorName = (id) => {
@@ -59,31 +59,56 @@ function Courses() {
                 <div className="categories-container mb-20 flex items-center justify-center">
                     {/*<h2>Categories</h2>*/}
                     <button
-                        className="font-poppins text-lg font-semibold text-[#002333] mr-2.5 px-3.5 py-1 border border-transparent bg-[#05F26C] rounded-full"
+                        className={`font-poppins text-lg font-semibold  mr-2.5 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
+                        ${
+                            selectedCategory === null
+                                ? "bg-[#05F26C] text-[#002333] border-transparent"
+                                : "border-white text-white"
+                        }`}
                         onClick={() => CategorySelect(null)}
                     >
                         All
                     </button>
                     <button
-                        className="font-poppins text-lg font-semibold text-white mr-2.5 px-3.5 py-1 border border-white rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none"
+                        className={`font-poppins text-lg font-semibold  mr-2.5 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
+                        ${
+                            selectedCategory === "Programming"
+                                ? "bg-[#05F26C] text-[#002333] border-transparent"
+                                : "border-white text-white"
+                        }`}
                         onClick={() => CategorySelect("Programming")}
                     >
                         Programming
                     </button>
                     <button
-                        className="font-poppins text-lg font-semibold text-white mr-2.5 px-3.5 py-1 border border-white rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none"
+                        className={`font-poppins text-lg font-semibold  mr-2.5 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
+                        ${
+                            selectedCategory === "Software Engineering"
+                                ? "bg-[#05F26C] text-[#002333] border-transparent"
+                                : "border-white text-white"
+                        }`}
                         onClick={() => CategorySelect("Software Engineering")}
                     >
                         Software Engineering
                     </button>
                     <button
-                        className="font-poppins text-lg font-semibold text-white mr-2.5 px-3.5 py-1 border border-white rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none"
+                        className={`font-poppins text-lg font-semibold  mr-2.5 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
+                        ${
+                            selectedCategory === "Database"
+                                ? "bg-[#05F26C] text-[#002333] border-transparent"
+                                : "border-white text-white"
+                        }`}
                         onClick={() => CategorySelect("Database")}
                     >
                         Database
                     </button>
                     <button
-                        className="font-poppins text-lg font-semibold text-white mr-2.5 px-3.5 py-1 border border-white rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none"
+                        className={`font-poppins text-lg font-semibold  mr-2.5 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
+                        ${
+                            selectedCategory === "UI/UX"
+                                ? "bg-[#05F26C] text-[#002333] border-transparent"
+                                : "border-white text-white"
+                        }`}
                         onClick={() => CategorySelect("UI/UX")}
                     >
                         UI/UX
@@ -93,7 +118,7 @@ function Courses() {
                     {filteredCourses.length > 0 ? (
                         filteredCourses.map((course) => {
                             const { id, title, cover_photo } = course;
-                            
+
                             return (
                                 <div key={id}>
                                     <Link
@@ -125,7 +150,7 @@ function Courses() {
 
                                                 <div className="mt-5 flex gap-2">
                                                     <span className="course-instructor">
-                                                        {/* <p>{instructor}</p> */}
+                                                        {/* <p onChange={() => instructorName(id)}>{instructor.name}</p> */}
                                                     </span>
                                                 </div>
                                             </div>

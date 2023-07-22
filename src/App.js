@@ -6,6 +6,7 @@ import Login from "./login";
 import CourseDetails from './courseDetails';
 import Searchbar from "./searchbar";
 import SearchResult from "./searchResult";
+import ResetPass from "./resetPassword";
 import Footer from "./footer";
 
 import {
@@ -30,6 +31,8 @@ function App() {
           <Route path="/contact" element={<Contact/>}></Route>
 
           <Route path="/login" element={<Login/>}></Route>
+
+          <Route path="/resetPassword" element={<ResetPass/>}></Route>
 
           <Route path="/courseDetails/:id" element={<CourseDetails/>}></Route>
 
