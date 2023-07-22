@@ -6,6 +6,8 @@ import Login from "./login";
 import CourseDetails from './courseDetails';
 import Searchbar from "./searchbar";
 import SearchResult from "./searchResult";
+import Footer from "./footer";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -34,6 +36,8 @@ function App() {
           <Route path="/searchbar" element={<Searchbar/>}></Route>
 
           <Route path="/searchResult/:searchValue" element={<SearchResult/>}></Route>
+
+          <Route path="/footer" element={<Footer/>}></Route>
       </Routes>
     </div>
     </Router>

@@ -5,6 +5,8 @@ import { useState } from "react";
 import Searchbar from "./searchbar";
 import Signup from "./signup";
 import Courses from "./courses";
+import Footer from "./footer";
+
 import { Link } from "react-router-dom"
 
 function LandingPage() {
@@ -109,6 +111,8 @@ function LandingPage() {
             <Courses />
             
             <Signup />
+            <Footer />
+            
             
         </body>
     );

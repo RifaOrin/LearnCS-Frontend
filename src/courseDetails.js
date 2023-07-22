@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { IonIcon } from '@ionic/react';
 import { caretForwardCircleOutline, checkmarkOutline , chevronDownOutline, peopleCircleOutline, logoYoutube, documentTextOutline, helpCircleOutline} from "ionicons/icons";
-
+import Footer from "./footer";
 const baseUrl = `http://127.0.0.1:8000/course/`;
 console.log("hello");
 
@@ -115,11 +115,11 @@ function CourseDetails() {
                     </div>
                 </div>
                 
-                <div className="fixed right-10 top-50 max-w-sm p-10 ml-10 mt-10 mr-20 border border-gray-200 rounded-lg shadow">
+                <div className=" max-w-sm p-10 ml-10 mt-10 mr-20 border border-gray-200 rounded-lg shadow">
                     <h2 className="mb-2 pb-3 text-2xl font-bold tracking-tight text-gray-900">$33.08</h2>
                     <a className="px-7 py-3 text-sm font-bold text-center text-white bg-[#4f975a] rounded-sm hover:bg-[#316439]" href="">Buy Now</a>
                     <p className="text-xs font-medium text-gray-500 pt-5">Aren't member?</p>
-                    <p className="text-xs underline text-[#4f975a]">Join for free</p>
+                    <p className="text-xs font-semibold underline text-[#4f975a]">Join for free</p>
 
                 </div>
                 
@@ -205,7 +205,7 @@ function CourseDetails() {
             
             
             <div className="w-3/4 pl-40 pt-5">
-            <div className="mt-5 pr-5 border-solid border-2 border-gray-300">
+            <div className="mt-5 pr-5 mb-7 border-solid border-2 border-gray-300">
             <h2 className="text-2xl font-semibold pt-5 pl-5 pb-6">Instructor</h2>
             {instructor.map((instructorDetails) => {
                 const { id, name, profession, photo, description } =
@@ -220,11 +220,11 @@ function CourseDetails() {
                                 
                                 <div className="inline-flex space-x-2">
                                 <IonIcon icon={caretForwardCircleOutline} className="text-2xl text-[#279477]"/>
-                                <p className="pb-3">38 Courses</p>
+                                <p className="pb-3 font-semibold">38 Courses</p>
                                 </div>
                                 <div className="inline-flex space-x-2">
                                 <IonIcon icon={peopleCircleOutline} className="text-2xl text-[#279477]"/>
-                                <p>167 Students</p>
+                                <p className="font-semibold">167 Students</p>
                                 </div>
                             </div>
                         </div>
@@ -236,8 +236,9 @@ function CourseDetails() {
             </div>
 
             
-         
+            <Footer />
         </div>
+        
     );
 }
 
