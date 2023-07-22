@@ -4,13 +4,15 @@ import Signup from "./signup";
 import Contact from "./contactUs";
 import Login from "./login";
 import CourseDetails from './courseDetails';
+import Searchbar from "./searchbar";
+import SearchResult from "./searchResult";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Switch,
-  Link,
+  
 } from "react-router-dom";
+
 
 function App() {
   return (
@@ -28,6 +30,10 @@ function App() {
           <Route path="/login" element={<Login/>}></Route>
 
           <Route path="/courseDetails/:id" element={<CourseDetails/>}></Route>
+
+          <Route path="/searchbar" element={<Searchbar/>}></Route>
+
+          <Route path="/searchResult/:searchValue" element={<SearchResult/>}></Route>
       </Routes>
     </div>
     </Router>

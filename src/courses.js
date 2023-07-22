@@ -7,6 +7,16 @@ function Courses() {
     const [courses, setCourses] = useState([]);
     const [error, setError] = useState("");
     const [selectedCategory, setSelectedCategory] = useState(null);
+    //const [courseID, setCourseId] = useState(null);
+    // const [instructor, setInstructor] = useState([]);
+
+    // const instructorName = (id) => {
+    //     if (courseID === id) {
+    //         setCourseId(null);
+    //     } else {
+    //         setCourseId(id);
+    //     }
+    // };
 
     useEffect(() => {
         axios
@@ -19,6 +29,14 @@ function Courses() {
                 setError(error.message);
             });
     }, []);
+
+    // useEffect(() => {
+    //     if (courseID) {
+    //         axios.get(url + courseID + "/instructor/").then((response) => {
+    //             setInstructor(response.data);
+    //         });
+    //     }
+    // }, [courseID]);
 
     const CategorySelect = (category) => {
         setSelectedCategory(category);
@@ -74,8 +92,8 @@ function Courses() {
                 <div className="course-list grid grid-cols-3 gap-3 -mx-3">
                     {filteredCourses.length > 0 ? (
                         filteredCourses.map((course) => {
-                            const { id, title, cover_photo, instructor } =
-                                course;
+                            const { id, title, cover_photo } = course;
+                            
                             return (
                                 <div key={id}>
                                     <Link
@@ -107,7 +125,7 @@ function Courses() {
 
                                                 <div className="mt-5 flex gap-2">
                                                     <span className="course-instructor">
-                                                        <p>{instructor}</p>
+                                                        {/* <p>{instructor}</p> */}
                                                     </span>
                                                 </div>
                                             </div>
