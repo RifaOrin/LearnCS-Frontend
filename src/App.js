@@ -44,7 +44,7 @@ function App() {
 
           <Route path="/footer" element={<Footer/>}></Route>
 
-          <Route path="/editprofilePage" element={<Editprofile/>}></Route>
+          <Route path="/editprofilePage/:id" element={<Editprofile/>}></Route>
 
           <Route path="/profile" element={<Profile/>}></Route>
       </Routes>
