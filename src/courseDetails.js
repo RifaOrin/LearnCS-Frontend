@@ -112,7 +112,7 @@ function CourseDetails() {
             <div className="w-full flex flex-row bg-[#012326] pb-5">
                 <div className="pl-40 w-3/4 pt-20 pr-10 text-white">
                     <h1 className="text-4xl font-bold mb-5">{title}</h1>
-                    <p className="">{description}</p>
+                    <p className="text-justify">{description}</p>
                     <p className="mt-2">Category: {category}</p>
                     {instructor.map((instructorDetails) => {
                         const { id, name } = instructorDetails;
@@ -319,7 +319,7 @@ function CourseDetails() {
                                         </div>
                                     </div>
                                 </div>
-                                <p className="pt-5 pr-20 pb-6">{description}</p>
+                                <p className="pt-5 pr-20 pb-6 text-justify">{description}</p>
                             </div>
                         );
                     })}

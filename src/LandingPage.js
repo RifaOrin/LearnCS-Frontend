@@ -91,12 +91,13 @@ function LandingPage() {
                     <h3 className="text-3xl my-5 font-bold max-w-2xl 2xl:text-4xl">
                         Knowledge with LearnCS
                     </h3>
-                    <p className="max-w-2xl my-5 text-base font-normal leading-7">
+                    <p className="max-w-2xl my-5 text-base font-normal leading-7 text-justify">
                         Discover a world of endless possibilities in the realm
                         of Computer Science, as LearnCS empowers you to master
                         new skills, broaden your horizons, and unleash your
                         potential.
                     </p>
+                    <Link to = "./courses">
                     <button
                         type="button"
                         className="text-xl font-bold inline-block bg-[#F2F2F2] text-[#498C60] py-2.5 px-6 mt-2.5 border-2
@@ -106,6 +107,7 @@ function LandingPage() {
                     >
                         Explore courses
                     </button>
+                    </Link>
                 </div>
             </section>
             <Courses />
