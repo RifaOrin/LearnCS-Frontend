@@ -9,6 +9,7 @@ import SearchResult from "./searchResult";
 import ResetPass from "./resetPassword";
 import Footer from "./footer";
 import Editprofile from "./editprofilePage";
+import Profile from "./profile";
 
 import {
   BrowserRouter as Router,
@@ -44,6 +45,8 @@ function App() {
           <Route path="/footer" element={<Footer/>}></Route>
 
           <Route path="/editprofilePage" element={<Editprofile/>}></Route>
+
+          <Route path="/profile" element={<Profile/>}></Route>
       </Routes>
     </div>
     </Router>
