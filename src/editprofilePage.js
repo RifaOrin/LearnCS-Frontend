@@ -11,13 +11,13 @@ function Editprofile(){
     const { id } = useParams();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-    const [phone_number, setPhoneNumber] = useState("");
     const [profile_picture, setProfilePicture] = useState("");
     const [university, setUniversity] = useState("");
     const [first_name, setFirstname] = useState("");
     const [last_name, setLastname] = useState("");
     const [location, setLocation] = useState("");
     const [about_me, setAbout] = useState("");
+    const [isError, setIsError] = useState("");
     const navigate = useNavigate();
     const [short_description,setDescription] = useState("");  
     const [isSaved, setIsSaved] = useState(false);
@@ -26,7 +26,6 @@ function Editprofile(){
         axios.get(baseUrl + id + "/").then((response) => {
             setUsername(response.data.username);
             setEmail(response.data.email);
-            setPhoneNumber(response.data.phone_number);
             setProfilePicture(response.data.profile_picture);
             setUniversity(response.data.university);
             setFirstname(response.data.first_name);
@@ -37,46 +36,59 @@ function Editprofile(){
         });
     }, []);
 
-    const handleSaveAndExit = (e) => {
-        const updatedData = {
-            username,
-            email,
-            phone_number,
-            profile_picture,
-            university,
-            first_name,
-            last_name,
-            location,
-            about_me,
-            short_description
-            // ... (add other fields as needed)
-        };
+    const handleProfileImage = (e) => {
+        console.log(e.target.files)
+        setProfilePicture(e.target.files[0])
+      }
 
-        axios.put(baseUrl + id + "/", updatedData) // Assuming PUT method for updating data
-            .then(response => {
-                // Handle success, redirect or show a success message
-                // navigate('/profile')
-            })
-            .catch(error => {
-                // Handle error, show an error message
-            });
-    };
+    const handleSaveAndExit = (e) => {
+        e.preventDefault();
+        
+        const formdata = new FormData();
+        
+        
+        formdata.append('first_name', first_name)
+        formdata.append('last_name', last_name)
+        formdata.append('email', email)
+        formdata.append('university', university)
+        formdata.append('location', location)
+        formdata.append('about_me', about_me)
+        formdata.append('username', username)
+        formdata.append('short_description', short_description)
+        axios({
+            method : "put",
+            url : baseUrl+ id + '/',
+            data : formdata,
+            headers: { "Content-Type": "multipart/form-data"},
+        })
+        .then((response) => {   
+            console.log(response.data)
+            navigate('/profile')
+        
+        })
+        .catch((error) => setIsError(error.message));
+    }
 
     return(
         <body className="bg-gray-100 min-h-screen">
             <div className="sticky top-0 z-10 w-full h-20 border bg-gray-100 flex justify-end items-center space-x-2 pr-40">
                 <button className="text-black text-sm font-semibold cursor-pointer">Cancel</button>
-                 <Link to="/profile">
+                 
                 <button className="text-black text-xs font-semibold px-3 py-2 cursor-pointer border rounded-md outline-none bg-[#05F26C] hover:bg-[#0dc55d]" onClick={handleSaveAndExit}>
                     Save and Exit
                 </button>
-                </Link>
+                
             </div>
             <div className="flex flex-col md:flex-row md:space-x-4 pl-20 pr-20 pb-10">
                 <div className="w-1/4 flex flex-col space-y-8 border ml-20 p-12 justify-center items-center">
                     <div className="w-40 h-40 overflow-hidden rounded-full">
                     <img src={profile_picture} className="object-cover w-full h-full"></img>
                     </div>
+                    <input
+                type="file"
+                accept="image/*"
+                onChange={handleProfileImage}
+            />
                     <div className="flex flex-col space-y-2">
                             <div className="relative">
                             <IonIcon
@@ -150,7 +162,7 @@ function Editprofile(){
                     <div className="flex flex-row mt-10">
                     <input type="text" placeholder="About Me"
                     className="w-full border-2 pl-2 py-2 outline-none font-semibold text-lg focus:border-green-700"
-                    value={about_me}
+                    
                     onChange={(e) => setAbout(e.target.value)}
                     >
                     </input>
@@ -162,7 +174,7 @@ function Editprofile(){
                     <div className="flex flex-row mt-10">
                     <input type="text" placeholder="Add Short Description"
                     className="w-full pb-10 pl-2 pt-2 font-semibold text-lg border-2 outline-none focus:border-green-700"
-                    value={short_description}
+                    
                     onChange={(e) => setDescription(e.target.value)}
                     >
                     </input>

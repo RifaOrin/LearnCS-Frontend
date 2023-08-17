@@ -101,14 +101,24 @@ function Profile() {
                     </div>
                 </div>
                 <div className="w-3/4">
-                    <button className="w-1/2 pt-10 pb-5 border-b-2 hover:border-b-4 text-black text-md font-semibold hover:text-green-700 hover:border-green-700"
+                    <button className={`w-1/2 pt-10 pb-5 border-b-2 hover:border-b-4 text-black text-md font-semibold
+                    ${
+                        showProfileInfo === true
+                            ? "border-b-4 text-green-700 border-green-700"
+                            : ""
+                    }`}
                         onClick={toggleProfileInfo}
                     >
                         Profile
                     </button>
 
                     <button
-                    className="w-1/2 pt-10 pb-5 border-b-2 hover:border-b-4 text-black text-md font-semibold hover:text-green-700 hover:border-green-700"
+                    className={`w-1/2 pt-10 pb-5 border-b-2 hover:border-b-4 text-black text-md font-semibold
+                    ${
+                        showEnrolledCourses === true
+                            ? "border-b-4 text-green-700 border-green-700"
+                            : ""
+                    }`}
                     onClick={toggleEnrolledCourses}
                 >
                     Enrolled Courses
