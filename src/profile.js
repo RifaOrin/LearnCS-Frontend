@@ -5,6 +5,7 @@ import { caretForwardCircleOutline } from "ionicons/icons";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import Navbar from "./navbar";
 
 const baseUrl = `http://127.0.0.1:8000/user/`;
 const id = "1";
@@ -56,15 +57,16 @@ function Profile() {
 
     return (
         <body className="bg-gray-100 min-h-screen">
-            <div className="sticky top-0 z-10 w-full h-20 border bg-gray-100 flex justify-end items-center space-x-2 pr-40">
+            <Navbar />
+            <div className="sticky top-0 z-10 w-full h-20 border bg-gray-100 flex justify-end items-center space-x-2 pr-10 lg:pr-40">
                 <Link to = {`/editprofilePage/${id}`}>
                 <button className="text-black hover:text-white text-sm font-semibold px-3 py-2 cursor-pointer border rounded-md outline-none bg-gray-100 hover:bg-black">
                     Edit Profile
                 </button>
                 </Link>
             </div>
-            <div className="flex flex-col md:flex-row md:space-x-4 pl-20 pr-20 pb-10">
-                <div className="w-1/4 flex flex-col space-y-8 border ml-20 p-12 justify-center items-center">
+            <div className="flex flex-col md:flex-row lg:space-x-4 pl-20 pr-20 pb-10">
+                <div className="w-full lg:w-1/4 flex flex-col space-y-8 border lg:ml-20 p-12 justify-center items-center">
                     <div className="w-40 h-40 overflow-hidden rounded-full">
                         <img
                             src={profile_picture}
@@ -72,10 +74,10 @@ function Profile() {
                         ></img>
                     </div>
                     <div className="flex flex-col space-y-2">
-                        <h1 className="text-2xl flex justify-center ">
+                        <h1 className="text-md flex justify-center font-medium">
                             {first_name} {last_name}
                         </h1>
-                        <p className="text-xs pb-5 flex justify-center text-gray-500">
+                        <p className="text-xs font-semibold pb-5 flex justify-center text-gray-500">
                             Student
                         </p>
                         <p className="text-md flex justify-center text-gray-500">
@@ -92,13 +94,13 @@ function Profile() {
                                 icon={caretForwardCircleOutline}
                                 className="text-xl text-gray-500"
                             />
-                            <p className="pb-3 font-semibold text-sm text-gray-500">
+                            <p className="pb-3 font-medium text-sm text-gray-500">
                                 {numberOfCourses} Course Enrolled
                             </p>
                         </div>
                     </div>
                 </div>
-                <div className="w-3/4">
+                <div className="w-full lg:w-3/4">
                     <button className={`w-1/2 pt-10 pb-5 border-b-2 hover:border-b-4 text-black text-md font-semibold
                     ${
                         showProfileInfo === true
@@ -123,19 +125,20 @@ function Profile() {
                 </button>
                 {showProfileInfo && (
                     <div>
-                        <h2 className="text-2xl font-semibold pt-5">About Me:</h2>
-                        <p>{about_me}</p>
-                        <h2 className="text-2xl font-semibold pt-5">Short Description:</h2>
-                        <p>{short_description}</p>
+                        <h2 className="text-2xl font-semibold pt-10 pl-5">About Me:</h2>
+                        <p className="p-5">{about_me}</p>
+                        <h2 className="text-2xl font-semibold pt-10 pl-5">Short Description:</h2>
+                        <p className="p-5 text-justify">{short_description}</p>
                     </div>
                 )}
 
                 {showEnrolledCourses && (
-                    <div>
+                    <div className="ml-10 grid grid-cols-1 lg:grid-cols-3">
                     {/* <ul> */}
                         {enrollcourse.map((course) => (
                             // <li key={course.id}>
-                                <div className="card">
+
+                                <div className="card mt-10">
                                             <div className="image-container h-40">
                                                 <img
                                                     className="w-full h-full object-cover"

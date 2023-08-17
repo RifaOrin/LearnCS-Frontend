@@ -1,6 +1,7 @@
 import Profilepic from "./images/profilePhoto.jpg";
 import { IonIcon } from "@ionic/react";
 import Footer from "./footer";
+import Navbar from "./navbar";
 import {
     personOutline,
     paperPlaneOutline,
@@ -86,6 +87,7 @@ function Editprofile() {
 
     return (
         <body className="bg-gray-100 min-h-screen">
+            <Navbar/>
             <div className="sticky top-0 z-10 w-full h-20 border bg-gray-100 flex justify-end items-center space-x-2 pr-40">
                 <Link to = "/profile">
                 <button className="text-black text-sm font-semibold cursor-pointer">
