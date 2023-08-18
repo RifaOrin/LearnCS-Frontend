@@ -73,20 +73,20 @@ function Profile() {
                             className="object-cover w-full h-full"
                         ></img>
                     </div>
-                    <div className="flex flex-col space-y-2">
-                        <h1 className="text-md flex justify-center font-medium">
+                    <div className="flex flex-col space-y-2 items-center justify-center">
+                        <h1 className="text-lg md:text-xl flex justify-center font-medium">
                             {first_name} {last_name}
                         </h1>
-                        <p className="text-xs font-semibold pb-5 flex justify-center text-gray-500">
+                        <p className="text-xs font-semibold px-2 py-1 rounded-sm cursor-pointer text-[#05F26C] bg-[#012326]" >
                             Student
                         </p>
-                        <p className="text-md flex justify-center text-gray-500">
+                        <p className="text-md pt-6 text-gray-500">
                             {university}
                         </p>
-                        <p className="text-sm flex justify-center text-gray-500">
+                        <p className="text-sm text-gray-500">
                             {location}
                         </p>
-                        <p className="text-sm flex justify-center text-gray-500 italic pt-5 border-b-2 pb-5">
+                        <p className="text-sm  text-gray-500 italic pt-5 border-b-2 pb-5">
                             {email}
                         </p>
                         <div className="flex flex-row space-x-1 pt-5">
@@ -137,8 +137,11 @@ function Profile() {
                     {/* <ul> */}
                         {enrollcourse.map((course) => (
                             // <li key={course.id}>
-
-                                <div className="card mt-10">
+                            <Link
+                            to={`/courseDetails/${id}#courseDetailsStart`}
+                            className="card-link"
+                            >
+                                <div className="card mt-10 hover:scale-105 transform transition-transform duration-300">
                                             <div className="image-container h-40">
                                                 <img
                                                     className="w-full h-full object-cover"
@@ -164,6 +167,7 @@ function Profile() {
                                                 
                                             </div>
                                         </div>
+                                        </Link>
                             // </li>
                         ))}
                     {/* </ul> */}

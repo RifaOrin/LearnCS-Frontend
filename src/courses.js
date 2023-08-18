@@ -129,7 +129,7 @@ function Courses() {
                                         to={`/courseDetails/${id}#courseDetailsStart`}
                                         className="card-link"
                                     >
-                                        <div className="card">
+                                        <div className="card hover:scale-105 transform transition-transform duration-300">
                                             <div className="image-container h-40">
                                                 <img
                                                     className="w-full h-full object-cover"
