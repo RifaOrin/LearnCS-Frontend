@@ -48,18 +48,18 @@ function Courses() {
 
     return (
         <body className="bg-[#012326] ">
-            <div className="course-container max-w-5xl mx-auto my-0 px-20 py-20 bg-[#012326]">
+            <div className="course-container w-full lg:max-w-5xl mx-auto my-0 px-20 py-20 bg-[#012326]">
                 <h2
-                    className="course-heading font-poppins font-bold text-center text-white pb-7"
-                    style={{ fontSize: "3rem" }}
+                    className="text-3xl md:text-4xl lg:text-5xl course-heading font-poppins font-bold text-center text-white mb-20"
+                    
                 >
                     Explore Inspiring CS Courses
                 </h2>
                 {error && <p className="error text-red-500">Error: {error}</p>}
-                <div className="categories-container mb-20 flex items-center justify-center">
+                <div className="categories-container mb-20 flex flex-wrap items-center justify-center">
                     {/*<h2>Categories</h2>*/}
                     <button
-                        className={`font-poppins text-lg font-semibold  mr-2.5 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
+                        className={`font-poppins text-lg font-semibold mr-2.5 mb-2 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
                         ${
                             selectedCategory === null
                                 ? "bg-[#05F26C] text-[#002333] border-transparent"
@@ -70,7 +70,7 @@ function Courses() {
                         All
                     </button>
                     <button
-                        className={`font-poppins text-lg font-semibold  mr-2.5 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
+                        className={`font-poppins text-lg font-semibold  mr-2.5 mb-2 px-4 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
                         ${
                             selectedCategory === "Programming"
                                 ? "bg-[#05F26C] text-[#002333] border-transparent"
@@ -81,7 +81,7 @@ function Courses() {
                         Programming
                     </button>
                     <button
-                        className={`font-poppins text-lg font-semibold  mr-2.5 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
+                        className={`font-poppins text-lg font-semibold  mr-2.5 mb-2 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
                         ${
                             selectedCategory === "Software Engineering"
                                 ? "bg-[#05F26C] text-[#002333] border-transparent"
@@ -91,8 +91,9 @@ function Courses() {
                     >
                         Software Engineering
                     </button>
+                    
                     <button
-                        className={`font-poppins text-lg font-semibold  mr-2.5 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
+                        className={`font-poppins text-lg font-semibold  mr-2.5 mb-2 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
                         ${
                             selectedCategory === "Database"
                                 ? "bg-[#05F26C] text-[#002333] border-transparent"
@@ -102,8 +103,10 @@ function Courses() {
                     >
                         Database
                     </button>
+                   
+                   
                     <button
-                        className={`font-poppins text-lg font-semibold  mr-2.5 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
+                        className={`font-poppins text-lg font-semibold  mr-2.5 mb-2 px-3.5 py-1 border  rounded-full hover:text-[#002333] hover:bg-[#05F26C] hover:border-transparent focus:outline-none
                         ${
                             selectedCategory === "UI/UX"
                                 ? "bg-[#05F26C] text-[#002333] border-transparent"
@@ -113,14 +116,15 @@ function Courses() {
                     >
                         UI/UX
                     </button>
+                   
                 </div>
-                <div className="course-list grid grid-cols-3 gap-3 -mx-3">
+                <div className="course-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 -mx-3">
                     {filteredCourses.length > 0 ? (
                         filteredCourses.map((course) => {
                             const { id, title, cover_photo } = course;
 
                             return (
-                                <div key={id}>
+                                <div key={id} className="max-w-xs mx-auto md:mx-0">
                                     <Link
                                         to={`/courseDetails/${id}#courseDetailsStart`}
                                         className="card-link"
