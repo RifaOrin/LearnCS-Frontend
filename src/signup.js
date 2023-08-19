@@ -45,27 +45,34 @@ function Signup() {
           "background-image": `url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')`,
         }}
       >
-        <div className="w-1/2 flex flex-col md:flex-row ml-32 px-8 py-10 items-center justify-center p-12 bg-no-repeat bg-cover bg-center rounded-xl bg-[#012326] bg-opacity-95">
-          <div class="grid grid-cols-2 gap-8">
-            <div class="text-green-500 p-4">
+        <div className="w-full flex flex-col md:flex-row items-center justify-center ">
+          <div className="w-1/2 flex items-center justify-center ">
+            <div className="grid grid-cols-2 gap-4  ">
+            
+            <div className="text-green-500 text-base font-medium px-10 py-10 bg-no-repeat bg-cover bg-center rounded-xl bg-[#012326] bg-opacity-95">
               Total Students
-              <h1 class="text-[#F2F2F2] text-3xl">3000+</h1>
+              <h1 className="text-[#F2F2F2] text-4xl font-medium pt-1">3000+</h1>
             </div>
-            <div class="text-green-500 p-4">
+            <div className="text-green-500 text-base font-medium px-10 py-10 bg-no-repeat bg-cover bg-center rounded-xl bg-[#052e31] bg-opacity-95">
               Total Instructors
-              <h1 class="text-[#F2F2F2] text-3xl">30+</h1>
+              <h1 className="text-[#F2F2F2] text-4xl font-medium pt-1">30+</h1>
             </div>
-            <div class="text-green-500 p-4">
+            
+            
+            <div className="text-green-500 text-base font-medium px-10 py-10 bg-no-repeat bg-cover bg-center rounded-xl bg-[#052e31] bg-opacity-95">
               Total Courses
-              <h1 class="text-[#F2F2F2] text-3xl">50+</h1>
+              <h1 className="text-[#F2F2F2] text-4xl font-medium pt-1">50+</h1>
             </div>
-            <div class="text-green-500 p-4">
+            <div className="text-green-500 text-base font-medium px-10 py-10 bg-no-repeat bg-cover bg-center rounded-xl bg-[#012326] bg-opacity-95">
               Total Study Material
-              <h1 class="text-[#F2F2F2] text-3xl">500+</h1>
+              <h1 className="text-[#F2F2F2] text-4xl font-medium pt-1">500+</h1>
             </div>
+            
+            </div>
+            
           </div>
-        </div>
-        <div className="w-1/2 mr-56 max-w-sm mx-auto p-8  bg-[#012326] bg-opacity-60 backdrop-blur-md rounded-xl shadow-md space-y-2 py-5 flex-auto">
+        
+        <div className="w-1/2 max-w-sm mx-auto p-8  bg-[#012326] bg-opacity-60 backdrop-blur-md rounded-xl shadow-md space-y-2 py-5 flex-auto">
           <div className="text-center space-y-2">
             <h1 className="mb-4 text-base text-center font-semibold text-[#F2F2F2]">
               Register your free account and get immidiate access to online
@@ -137,6 +144,7 @@ function Signup() {
               </p>
             </div>
           </div>
+        </div>
         </div>
       </div>
       {showPopup && (
