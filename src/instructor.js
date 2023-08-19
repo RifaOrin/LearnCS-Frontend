@@ -66,7 +66,7 @@ function Instructor() {
                         <h1 className="text-lg md:text-xl pb-1 flex justify-center font-medium">
                             {singleInstructor.name}
                         </h1>
-                        <p className="text-md text-gray-500 pb-2">{singleInstructor.profession}</p>
+                        <p className="text-md text-gray-500 pb-2 text-center">{singleInstructor.profession}</p>
                         <p className="text-sm font-semibold px-2 py-1 rounded-sm cursor-pointer text-[#05F26C] bg-[#012326]" >
                             Instructor
                         </p>
@@ -95,8 +95,8 @@ function Instructor() {
 
                     {instructorCourse.map((Instructorcourses) => (
                     <div>
-                    <h1 className="text-2xl font-bold pl-10 pt-16">Teaching</h1>
-                    <div key={Instructorcourses.id} className="max-w-xs mx-auto md:mx-0">
+                    <h1 className="text-2xl font-bold pl-10 pt-16 pb-10">Teaching</h1>
+                    <div key={Instructorcourses.id} className="pl-10 max-w-xs mx-auto md:mx-0">
                                     <Link
                                         to={`/courseDetails/${Instructorcourses.id}#courseDetailsStart`}
                                         className="card-link"

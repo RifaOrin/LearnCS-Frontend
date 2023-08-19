@@ -299,10 +299,12 @@ function CourseDetails() {
                                     {profession}
                                 </p>
                                 <div className="flex flex-row">
+                                    <div className="w-40 h-40 overflow-hidden rounded-full">
                                     <img
-                                        className="border rounded-full h-60"
+                                        className="object-cover w-full h-full"
                                         src={photo}
                                     />
+                                    </div>
                                     <div className="pl-10 pt-20 flex flex-col">
                                         <div className="inline-flex space-x-2">
                                             <IonIcon
