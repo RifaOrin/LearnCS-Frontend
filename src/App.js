@@ -11,6 +11,7 @@ import Footer from "./footer";
 import Editprofile from "./editprofilePage";
 import Profile from "./profile";
 import Navbar from "./navbar";
+import Instructor from "./instructor";
 
 import {
   BrowserRouter as Router,
@@ -50,6 +51,8 @@ function App() {
           <Route path="/profile" element={<Profile/>}></Route>
 
           <Route path="/navbar" element={<Navbar/>}></Route>
+
+          <Route path="/instructor" element={<Instructor/>}></Route>
       </Routes>
     </div>
     </Router>

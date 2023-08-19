@@ -74,10 +74,10 @@ function Profile() {
                         ></img>
                     </div>
                     <div className="flex flex-col space-y-2 items-center justify-center">
-                        <h1 className="text-lg md:text-xl flex justify-center font-medium">
+                        <h1 className="text-lg lg:text-xl flex justify-center font-medium">
                             {first_name} {last_name}
                         </h1>
-                        <p className="text-xs font-semibold px-2 py-1 rounded-sm cursor-pointer text-[#05F26C] bg-[#012326]" >
+                        <p className="text-sm font-semibold px-2 py-1 rounded-sm cursor-pointer text-[#05F26C] bg-[#012326]" >
                             Student
                         </p>
                         <p className="text-md pt-6 text-gray-500">

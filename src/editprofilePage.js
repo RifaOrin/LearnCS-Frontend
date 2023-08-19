@@ -101,8 +101,8 @@ function Editprofile() {
                     Save and Exit
                 </button>
             </div>
-            <div className="flex flex-col lg:flex-row md:space-x-4 pl-20 pr-20 pb-10">
-                <div className="w-full lg:w-1/4 flex flex-col space-y-8 border lg:ml-10 p-12 justify-center items-center">
+            <div className="flex flex-col md:flex-row md:space-x-4 pl-20 pr-20 pb-10">
+                <div className="w-full md:w-2/4 flex flex-col space-y-8 border lg:ml-10 p-12 justify-center items-center">
                 <div
                 className="w-40 h-40 overflow-hidden rounded-full relative"
                 onMouseEnter={() => setIsUpdatingProfilePicture(true)}
@@ -194,9 +194,9 @@ function Editprofile() {
                         </div>
                     </div>
                 </div>
-                <div className="w-full lg:w-3/4">
+                <div className="w-full md:w-3/4">
                     <button className="w-full pt-10 pb-5 border-b-4 text-lg font-semibold text-green-700 border-green-700 ">
-                        Profile
+                        Student Profile
                     </button>
                     <div className="flex flex-row mt-10">
                         <input
