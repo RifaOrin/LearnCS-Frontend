@@ -16,7 +16,7 @@ const baseUrl = `http://127.0.0.1:8000/course/`;
 console.log("hello");
 
 function CourseDetails() {
-    const { id } = useParams();
+    const { course_id } = useParams();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
@@ -48,7 +48,7 @@ function CourseDetails() {
 
     useEffect(() => {
         axios
-            .get(baseUrl + id + "/")
+            .get(baseUrl + course_id + "/")
             .then((response) => {
                 setTitle(response.data.title);
                 setDescription(response.data.description);
@@ -64,11 +64,11 @@ function CourseDetails() {
                 }
             });
 
-        axios.get(baseUrl + id + "/instructor/").then((response) => {
+        axios.get(baseUrl + course_id + "/instructor/").then((response) => {
             setInstructor(response.data);
         });
 
-        axios.get(baseUrl + id + "/module").then((response) => {
+        axios.get(baseUrl + course_id + "/module").then((response) => {
             setModule(response.data);
         });
         const element = document.getElementById('courseDetailsStart');
@@ -81,26 +81,26 @@ function CourseDetails() {
     useEffect(() => {
         if (expandedModuleId) {
             axios
-                .get(baseUrl + id + "/module/" + expandedModuleId + "/quiz/")
+                .get(baseUrl + course_id+ "/module/" + expandedModuleId + "/quiz/")
                 .then((response) => {
                     setQuiz(response.data);
                 });
 
             axios
-                .get(baseUrl + id + "/module/" + expandedModuleId + "/pdf/")
+                .get(baseUrl + course_id + "/module/" + expandedModuleId + "/pdf/")
                 .then((response) => {
                     console.log(expandedModuleId);
                     setPdf(response.data);
                 });
 
             axios
-                .get(baseUrl + id + "/module/" + expandedModuleId + "/video/")
+                .get(baseUrl + course_id + "/module/" + expandedModuleId + "/video/")
                 .then((response) => {
                     console.log(1);
                     setVideo(response.data);
                 });
         }
-    }, [expandedModuleId, id]);
+    }, [expandedModuleId, course_id]);
 
     // //const Instructorarray = instructor;
     // if(instructor && instructor.length>0){
@@ -204,6 +204,7 @@ function CourseDetails() {
             </h2>
             {module.map((Modules) => {
                 const { id, name } = Modules;
+                const module_id = id;
                 return (
                     <div className="w-3/4 pl-40 " key={id}>
                         <div
@@ -262,12 +263,14 @@ function CourseDetails() {
                                             className="text-xl"
                                         />
                                         {quiz.map((item) => (
+                                            <Link to ={`/quizquestion/${course_id}/${Modules.id}/${item.id}`}>
                                             <p
                                                 className=" text-sm text-gray-600"
                                                 key={item.id}
                                             >
                                                 {item.quiz_title}
                                             </p>
+                                            </Link>
                                         ))}
                                     </div>
                                 </div>
@@ -287,9 +290,11 @@ function CourseDetails() {
                             instructorDetails;
                         return (
                             <div className="pl-5 pb-2">
+                                <Link to= {`/instructor/${instructorDetails.id}/${course_id}`}>
                                 <h1 className="text-[#279477] font-semibold text-xl underline pb-5">
                                     {name}
                                 </h1>
+                                </Link>
                                 <p className="text-md font-semibold pb-3">
                                     {profession}
                                 </p>
