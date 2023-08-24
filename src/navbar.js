@@ -36,7 +36,7 @@ function Navbar(){
             </button>
             <input
                 type="text"
-                placeholder="Search for courses, instructor"
+                placeholder="Search for courses"
                 className="hidden md:inline-block bg-[#012326] placeholder-white text-white border-2 outline-none rounded-sm py-2 px-4 w-full  pl-10"
             />
             </div>
