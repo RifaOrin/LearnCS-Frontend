@@ -7,16 +7,9 @@ function Courses() {
     const [courses, setCourses] = useState([]);
     const [error, setError] = useState("");
     const [selectedCategory, setSelectedCategory] = useState(null);
-    // const [courseID, setCourseId] = useState(null);
-    // const [instructor, setInstructor] = useState([]);
-
-    // const instructorName = (id) => {
-    //     if (courseID === id) {
-    //         setCourseId(null);
-    //     } else {
-    //         setCourseId(id);
-    //     }
-    // };
+    const [courseIds, setCourseIds] = useState([]);
+    const [courseInstructors, setCourseInstructors] = useState([]);
+    
 
     useEffect(() => {
         axios
@@ -24,19 +17,39 @@ function Courses() {
             .then((response) => {
                 console.log(response.data);
                 setCourses(response.data);
+
+                const ids = response.data.map(course => course.id);
+                setCourseIds(ids);
             })
             .catch((error) => {
                 setError(error.message);
             });
     }, []);
+    
+    useEffect(() => {
+        const fetchInstructorsSequentially = async () => {
+            const instructorInfoArray = [];
+    
+            for (const courseId of courseIds) {
+                try {
+                    const response = await axios.get(`${url}${courseId}/instructor`);
+                    const instructorName = response.data[0].name;
+                    instructorInfoArray.push({ courseId, instructorName });
+                    setCourseInstructors(instructorInfoArray);
+                } catch (error) {
+                    console.error(`Error fetching instructor data for course ID ${courseId}:`, error);
+                }
+            }
+    
+            
+        };
+    
+        if (courseIds.length > 0) {
+            fetchInstructorsSequentially();
+        }
+    }, [courseIds]);
 
-    // useEffect(() => {
-    //     if (courseID) {
-    //         axios.get(url + courseID + "/instructor/").then((response) => {
-    //             setInstructor(response.data);
-    //         });
-    //     }
-    // }, [courseID]);
+
 
     const CategorySelect = (category) => {
         setSelectedCategory(category);
@@ -121,7 +134,16 @@ function Courses() {
                 <div className="course-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 -mx-3">
                     {filteredCourses.length > 0 ? (
                         filteredCourses.map((course) => {
-                            const { id, title, cover_photo } = course;
+                            const { id, title, cover_photo,students } = course;
+
+                            const instructorInfo = courseInstructors.find(info => {
+                                if (info) {
+                                    console.log("Comparing:", info.courseId, id);
+                                    return info.courseId === id;
+                                }
+                                return false;
+                            });
+                            const instructorName = instructorInfo ? instructorInfo.instructorName : "Unknown Instructor";
 
                             return (
                                 <div key={id} className="max-w-xs mx-auto md:mx-0">
@@ -141,7 +163,7 @@ function Courses() {
                                             <div className="p-5 flex flex-col gap-3">
                                                 <div className="flex items-center justify-between">
                                                     <span className="badge">
-                                                        72 students
+                                                    {students.length} student{students.length !== 1 ? 's' : ''}
                                                     </span>
                                                     <span className="badge">
                                                         1hr 13min
@@ -154,7 +176,7 @@ function Courses() {
 
                                                 <div className="mt-5 flex gap-2">
                                                     <span className="course-instructor">
-                                                        {/* <p onChange={() => instructorName(id)}>{instructor.name}</p> */}
+                                                        {instructorName}
                                                     </span>
                                                 </div>
                                             </div>

@@ -13,7 +13,7 @@ import {
 } from "ionicons/icons";
 import Footer from "./footer";
 const baseUrl = `http://127.0.0.1:8000/course/`;
-console.log("hello");
+//console.log("hello");
 
 function CourseDetails() {
     const { course_id } = useParams();
@@ -23,17 +23,22 @@ function CourseDetails() {
     const [cover_photo, setCover_photo] = useState("");
     const [learning, setLearning] = useState("");
     const [skills, setSkills] = useState("");
-    const [instructorName, setInstructorName] = useState("");
+    const [instructorId, setInstructorId] = useState(null);
 
     const [quiz, setQuiz] = useState([]);
     const [instructor, setInstructor] = useState([]);
     const [module, setModule] = useState([]);
     const [pdf, setPdf] = useState([]);
     const [video, setVideo] = useState([]);
+    const [instructorCourse, setInstructorCourse] = useState([]);
+    const [courseCount, setCourseCount] = useState(0);
+    const [totalStudents, setTotalStudents] = useState(0);
 
     const [isError, setIsError] = useState("");
 
     const [expandedModuleId, setExpandedModuleId] = useState(null);
+    const instrrctorCourselink =
+        "http://127.0.0.1:8000/course/teacher/" + instructorId + "/teachings/";
 
     // Function to toggle the dropdown visibility
     const toggleModuleDropdown = (moduleId) => {
@@ -66,46 +71,75 @@ function CourseDetails() {
 
         axios.get(baseUrl + course_id + "/instructor/").then((response) => {
             setInstructor(response.data);
+
+            setInstructorId(response.data[0].id);
         });
 
         axios.get(baseUrl + course_id + "/module").then((response) => {
             setModule(response.data);
         });
-        const element = document.getElementById('courseDetailsStart');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+        const element = document.getElementById("courseDetailsStart");
+        if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [course_id]);
 
-    }, []);
+    useEffect(() => {
+        if (instructorId) {
+            axios.get(instrrctorCourselink).then((response) => {
+                setInstructorCourse(response.data);
+                setCourseCount(response.data.length);
+
+                const totalStudentsCount = response.data.reduce(
+                    (total, course) => total + course.students.length,
+                    0
+                );
+                setTotalStudents(totalStudentsCount);
+            });
+        }
+    }, [instructorId]);
 
     useEffect(() => {
         if (expandedModuleId) {
             axios
-                .get(baseUrl + course_id+ "/module/" + expandedModuleId + "/quiz/")
+                .get(
+                    baseUrl +
+                        course_id +
+                        "/module/" +
+                        expandedModuleId +
+                        "/quiz/"
+                )
                 .then((response) => {
                     setQuiz(response.data);
                 });
 
             axios
-                .get(baseUrl + course_id + "/module/" + expandedModuleId + "/pdf/")
+                .get(
+                    baseUrl +
+                        course_id +
+                        "/module/" +
+                        expandedModuleId +
+                        "/pdf/"
+                )
                 .then((response) => {
                     console.log(expandedModuleId);
                     setPdf(response.data);
                 });
 
             axios
-                .get(baseUrl + course_id + "/module/" + expandedModuleId + "/video/")
+                .get(
+                    baseUrl +
+                        course_id +
+                        "/module/" +
+                        expandedModuleId +
+                        "/video/"
+                )
                 .then((response) => {
                     console.log(1);
                     setVideo(response.data);
                 });
         }
     }, [expandedModuleId, course_id]);
-
-    // //const Instructorarray = instructor;
-    // if(instructor && instructor.length>0){
-    //     setInstructorName(instructor[0].name);
-    // }
 
     return (
         <div id="courseDetailsStart">
@@ -169,10 +203,10 @@ function CourseDetails() {
                     <p className="text-xs font-medium text-gray-500 pt-5">
                         Aren't member?
                     </p>
-                    <Link to = "/signup">
-                    <p className="text-xs font-semibold underline text-[#4f975a]">
-                        Join for free
-                    </p>
+                    <Link to="/signup">
+                        <p className="text-xs font-semibold underline text-[#4f975a]">
+                            Join for free
+                        </p>
                     </Link>
                 </div>
             </div>
@@ -235,7 +269,11 @@ function CourseDetails() {
                                                 className="text-sm text-gray-600"
                                                 key={item.id}
                                             >
-                                                {item.title}
+                                                <Link
+                                                    to={`/contentshow/${course_id}`}
+                                                >
+                                                    {item.title}
+                                                </Link>
                                             </p>
                                         ))}
                                     </div>
@@ -247,12 +285,16 @@ function CourseDetails() {
                                             className="text-xl"
                                         />
                                         {pdf.map((item) => (
-                                            <p
-                                                className="text-sm text-gray-600"
-                                                key={item.id}
+                                            <Link
+                                                to={`/contentshow/${course_id}`}
                                             >
-                                                {item.title}
-                                            </p>
+                                                <p
+                                                    className="text-sm text-gray-600"
+                                                    key={item.id}
+                                                >
+                                                    {item.title}
+                                                </p>
+                                            </Link>
                                         ))}
                                     </div>
                                     {/* Show quizzes */}
@@ -263,13 +305,15 @@ function CourseDetails() {
                                             className="text-xl"
                                         />
                                         {quiz.map((item) => (
-                                            <Link to ={`/quizquestion/${course_id}/${Modules.id}/${item.id}`}>
-                                            <p
-                                                className=" text-sm text-gray-600"
-                                                key={item.id}
+                                            <Link
+                                                to={`/quizquestion/${course_id}/${Modules.id}/${item.id}`}
                                             >
-                                                {item.quiz_title}
-                                            </p>
+                                                <p
+                                                    className=" text-sm text-gray-600"
+                                                    key={item.id}
+                                                >
+                                                    {item.quiz_title}
+                                                </p>
                                             </Link>
                                         ))}
                                     </div>
@@ -288,12 +332,15 @@ function CourseDetails() {
                     {instructor.map((instructorDetails) => {
                         const { id, name, profession, photo, description } =
                             instructorDetails;
+
                         return (
                             <div className="pl-5 pb-2">
-                                <Link to= {`/instructor/${instructorDetails.id}/${course_id}`}>
-                                <h1 className="text-[#279477] font-semibold text-xl underline pb-5">
-                                    {name}
-                                </h1>
+                                <Link
+                                    to={`/instructor/${instructorDetails.id}/${course_id}`}
+                                >
+                                    <h1 className="text-[#279477] font-semibold text-xl underline pb-5">
+                                        {name}
+                                    </h1>
                                 </Link>
                                 <p className="text-md font-semibold pb-3">
                                     {profession}
@@ -312,7 +359,7 @@ function CourseDetails() {
                                                 className="text-2xl text-[#279477]"
                                             />
                                             <p className="pb-3 font-semibold">
-                                                38 Courses
+                                                {courseCount} Courses
                                             </p>
                                         </div>
                                         <div className="inline-flex space-x-2">
@@ -321,12 +368,14 @@ function CourseDetails() {
                                                 className="text-2xl text-[#279477]"
                                             />
                                             <p className="font-semibold">
-                                                167 Students
+                                                {totalStudents} Students
                                             </p>
                                         </div>
                                     </div>
                                 </div>
-                                <p className="pt-5 pr-20 pb-6 text-justify">{description}</p>
+                                <p className="pt-5 pr-20 pb-6 text-justify">
+                                    {description}
+                                </p>
                             </div>
                         );
                     })}
