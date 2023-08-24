@@ -13,6 +13,7 @@ import Profile from "./profile";
 import Navbar from "./navbar";
 import Instructor from "./instructor";
 import Quizquestion from "./quizquestion";
+import ContentShow from "./contentshow";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -65,6 +66,7 @@ function App() {
                         path="/quizquestion/:course_id/:module_id/:quiz_id"
                         element={<Quizquestion />}
                     ></Route>
+                    <Route path="/contentshow/:course_id" element={<ContentShow />}></Route>
                 </Routes>
             </div>
         </Router>
