@@ -14,6 +14,7 @@ import Navbar from "./navbar";
 import Instructor from "./instructor";
 import Quizquestion from "./quizquestion";
 import ContentShow from "./contentshow";
+import Chat from "./chat";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -31,6 +32,8 @@ function App() {
                     <Route path="/contact" element={<Contact />}></Route>
 
                     <Route path="/login" element={<Login />}></Route>
+
+                    <Route path="/chat" element={<Chat />}></Route>
 
                     <Route
                         path="/resetPassword"
