@@ -23,7 +23,8 @@ module.exports = {
     },
   },
   plugins: [
-    require('tailwindcss-blend-mode')()
+    require('tailwindcss-blend-mode')(),
+    require('tailwind-scrollbar'),
   ],
 }
 
