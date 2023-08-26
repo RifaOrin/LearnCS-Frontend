@@ -6,6 +6,7 @@ function Chat(){
     const[messages, setMessages] = useState([])
     const[message, setMessage] = useState("")
     const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
+    const myUsername = 'zisan'
     useEffect(() => {
         db.collection('messages').orderBy('createdAt').limit(50).onSnapshot(snapshot =>{
             setMessages(snapshot.docs.map(doc => doc.data()))
@@ -16,16 +17,17 @@ function Chat(){
         e.preventDefault()
         await db.collection('messages').add({
             text: message,
-            createdAt: serverTimestamp
+            createdAt: serverTimestamp,
+            username: myUsername
         })
         setMessage('')
     }
 
     return(
         <div>
-            {messages.map(({id,text}) => (
+            {messages.map(({id,text,username}) => (
                 <div key={id}>
-                    <p>{text}</p>
+                    <p>{text} sent by - {username}</p>
                 </div>
             ))}
 
