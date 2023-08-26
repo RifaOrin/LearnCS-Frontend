@@ -5,6 +5,9 @@ import { Viewer, Worker } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+import Navbar from "./navbar";
+import { IonIcon } from "@ionic/react";
+import { helpCircleOutline, helpCircleSharp, playCircleOutline, readerOutline } from "ionicons/icons";
 const baseUrl = `http://127.0.0.1:8000/course/`;
 
 function ContentShow() {
@@ -103,68 +106,96 @@ function ContentShow() {
     const newplugin = defaultLayoutPlugin();
 
     return (
-        <div className="flex">
-            <div className="flex flex-col mr-4 w-2/3">
+        <body className="min-h-screen">
+            <Navbar />
+        <div className=" flex flex-row" >
+            <div className="h-screen flex flex-col pt-14 pl-14 mr-4 w-1/5 overflow-y-auto" style={{ height: "85vh" }}>
                 {modules.map((module) => (
-                    <div key={module.id} className="mb-4">
-                        <Link to="#" onClick={() => toggleModuleDropdown(module.id)}>
+                    <div key={module.id} className="mb-3">
+                        <Link to="#" className="text-base font-semibold" onClick={() => toggleModuleDropdown(module.id)}>
                             {module.name}
                         </Link>
                         {expandedModuleId === module.id && (
                             <div>
-                                <h3>Quizzes:</h3>
-                                <ul>
-                                    {quiz.map((item) => (
-                                        <li key={item.id}>{item.quiz_title}</li>
-                                    ))}
-                                </ul>
-                                <h3>PDFs:</h3>
-                                <ul>
-                                    {pdf.map((item) => (
-                                        <li key={item.id}>
-                                            <Link to="#" onClick={() => handlePdfClick(item.pdf_file)}>
-                                                {item.title}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                                <h3>Videos:</h3>
+                                
                                 <ul>
                                     {video.map((item) => (
-                                        <li key={item.id}>
-                                            <Link to="#" onClick={() => handleVideoClick(item.video_file)}>
+                                        <li className="flex flex-row items-center space-x-2 pt-3 pb-2" key={item.id}>
+                                            <IonIcon
+                                                icon={playCircleOutline}
+                                                className="text-2xl text-[#279477]"
+                                            />
+                                            <p className="font-semibold text-sm">Video:</p>
+                                            <Link to="#" className=" text-sm" onClick={() => handleVideoClick(item.video_file)}>
+                                                 {item.title}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                                
+                                <ul>
+                                    {pdf.map((item) => (
+                                        <li className="flex flex-row items-center space-x-2 pt-2 pb-2" key={item.id}>
+                                            <IonIcon
+                                                icon={readerOutline}
+                                                className="text-2xl text-[#279477]"
+                                            />
+                                            <p className="font-semibold text-sm">Pdf:</p>
+                                            <Link to="#" className=" text-sm" onClick={() => handlePdfClick(item.pdf_file)}>
                                                 {item.title}
                                             </Link>
                                         </li>
                                     ))}
                                 </ul>
+                                
+                                <ul className="flex flex-row items-center space-x-2 pt-2 pb-2">
+                                <IonIcon
+                                        icon={helpCircleOutline}
+                                        className="text-2xl text-[#279477]"
+                                />
+                                <p className="font-semibold text-sm">Quiz:</p>
+                                    {quiz.map((item) => (
+                                        <li className="text-sm" key={item.id}>
+                                                
+                                             {item.quiz_title}</li>
+                                    ))}
+                                </ul>
+                                
+                                
+                                
                             </div>
                         )}
                     </div>
                 ))}
             </div>
-            <div className="w-1/3">
-                <h2 className="mb-4">View PDF</h2>
+            <div className="w-3/4">
+                
                 <div>
                     {selectedPdf && (
-                        <div className="border rounded-lg shadow p-4 mb-4">
+                        <div className="h-1/3 w-11/12  ml-14 border rounded-lg shadow p-4 mb-4" style={{ height: "95vh" }}>
                             <Worker workerUrl="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js">
                                 <Viewer fileUrl={selectedPdf} plugins={[newplugin]} />
                             </Worker>
                         </div>
                     )}
-                    {!selectedPdf && <div className="text-gray-500 italic">No PDF</div>}
+                    
                 </div>
+                <div> 
                 {selectedVideo && (
+                    
                     <div className="p-6">
-                        <video controls className="w-full">
+                        <h1 className=" text-4xl font-medium mb-10 mt-10 ml-14 " >Introduction to MySQL</h1>
+                        <video controls className="w-3/4 ml-14">
                             <source src={selectedVideo} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
+                        
                     </div>
                 )}
+                </div>
             </div>
         </div>
+        </body>
     );
 }
 export default ContentShow;
