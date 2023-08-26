@@ -69,19 +69,20 @@ function Quizquestion() {
     return (
         <div className="bg-gray-100 min-h-screen py-8">
             <div className="max-w-xl mx-auto p-4 bg-white shadow-md rounded-lg">
-                <h1 className="text-2xl font-semibold mb-4">Quiz Questions</h1>
+                <h1 className="text-2xl font-semibold mb-5 mt-2 ml-2">Quiz Questions</h1>
                 <ul>
                     {quiz.map((question, index) => (
                         <li key={question.id} className="mb-6">
-                            <h2 className="text-lg font-semibold mb-2">
+                            <h2 className="text-lg font-semibold mb-4 ml-2">
                                 {question.question}
                             </h2>
                             <form>
-                                <label>
+                                <label className="flex items-center space-x-2 ml-2">
                                     <input
                                         type="radio"
                                         name={`question_${question.id}`}
                                         value="option1"
+                                        className="mr-2"
                                         checked={
                                             selectedOptions[index] ===
                                             question.option1
@@ -96,11 +97,12 @@ function Quizquestion() {
                                     {question.option1}
                                 </label>
                                 <br />
-                                <label>
+                                <label className="flex items-center space-x-2 ml-2">
                                     <input
                                         type="radio"
                                         name={`question_${question.id}`}
                                         value="option2"
+                                        className="mr-2"
                                         checked={
                                             selectedOptions[index] ===
                                             question.option2
@@ -115,11 +117,12 @@ function Quizquestion() {
                                     {question.option2}
                                 </label>
                                 <br />
-                                <label>
+                                <label className="flex items-center space-x-2 ml-2">
                                     <input
                                         type="radio"
                                         name={`question_${question.id}`}
                                         value="option3"
+                                        className="mr-2"
                                         checked={
                                             selectedOptions[index] ===
                                             question.option3
@@ -134,11 +137,12 @@ function Quizquestion() {
                                     {question.option3}
                                 </label>
                                 <br />
-                                <label>
+                                <label className="flex items-center space-x-2 ml-2">
                                     <input
                                         type="radio"
                                         name={`question_${question.id}`}
                                         value="option4"
+                                        className="mr-2"
                                         checked={
                                             selectedOptions[index] ===
                                             question.option4
@@ -156,57 +160,62 @@ function Quizquestion() {
                         </li>
                     ))}
                 </ul>
+                <div className="flex flex-col items-end">
                 <button
-                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    className="mt-4 bg-[#13974c] text-white font-semibold px-4 py-2 rounded hover:bg-[#0dc55d]"
                     onClick={saveQuizAttempt}
                 >
                     Submit Answers
                 </button>
                 <Link
-                    className="block mt-4 text-blue-500 hover:underline"
+                    className="block mt-4 text-[#13974c] hover:underline"
                     to="/"
                 >
                     Go back
                 </Link>
+                </div>
             </div>
             {showPopup && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-4 rounded-lg">
-                        <h2 className="text-lg font-semibold mb-2">
+                    <div className="bg-white p-8 rounded-lg">
+                        <h2 className="text-xl font-bold mb-2 text-center pb-5">
                             Quiz Results
                         </h2>
-                        <p className="mb-2">Your Answers:</p>
+                        <p className="mb-2 font-semibold text-lg">Your Answers:</p>
                         <ul className="mb-4">
                             {quiz.map((question, index) => (
                                 <li key={question.id}>
-                                    <p>
+                                    <p className="font-medium">
                                         Question {index + 1}:{" "}
                                         {selectedOptions[index]}
                                         {selectedOptions[index] ===
                                         question.correct_answer ? (
-                                            <span className="text-green-500 ml-2">
+                                            <span className="text-green-500 ml-2 font-medium">
                                                 Correct
                                             </span>
                                         ) : (
-                                            <span className="text-red-500 ml-2">
+                                            <span className="text-red-500 ml-2 font-medium">
                                                 Incorrect
                                             </span>
                                         )}
                                     </p>
-                                    <p>
+                                    <p className="font-medium">
                                         Correct Answer:{" "}
                                         {question.correct_answer}
                                     </p>
                                 </li>
                             ))}
                         </ul>
-                        <p className="mb-2">Correct Answers: {correctCount}</p>
+                        
+                        <div className="flex flex-col items-center mt-5 mb-2">
+                        <p className="mb-2 font-medium pt-5">Correct Answers: {correctCount}</p>
                         <button
-                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                            className="bg-[#13974c] text-white font-semibold px-4 py-2 rounded hover:bg-[#0dc55d]"
                             onClick={() => setShowPopup(false)}
                         >
                             Close
                         </button>
+                        </div>
                     </div>
                 </div>
             )}
