@@ -1,4 +1,4 @@
-import Profilepic from "./images/profilePhoto.jpg";
+//import Profilepic from "./images/profilePhoto.jpg";
 import { IonIcon } from "@ionic/react";
 import Footer from "./footer";
 import Navbar from "./navbar";
@@ -13,8 +13,10 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 const baseUrl = `http://127.0.0.1:8000/user/`;
+const Userurl = "http://127.0.0.1:8000/auth/users/me/"
 function Editprofile() {
     const { id } = useParams();
+    const [userid, setUserid] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [profile_picture, setProfilePicture] = useState("");
@@ -30,9 +32,32 @@ function Editprofile() {
     const [selectedProfilePicture, setSelectedProfilePicture] = useState(null); // New state for selected profile picture
     const [previewImage, setPreviewImage] = useState(null);
     const [isUpdatingProfilePicture, setIsUpdatingProfilePicture] = useState(false);
+    const Access = localStorage.accessToken
 
     useEffect(() => {
-        axios.get(baseUrl + id + "/").then((response) => {
+        axios.get(Userurl,{
+            headers: {
+              'Authorization': `JWT ${Access}`
+            }
+            })
+            .then((response) => {
+                setUserid(response.data.id);
+            })
+            .catch((error) => {
+                
+                if (error.message === "Request failed with status code 401"){
+                  
+                    navigate('/login')
+                  }
+                
+              });
+
+
+        axios.get(baseUrl + id ,{
+            headers: {
+              'Authorization': `JWT ${Access}`
+            }
+            }).then((response) => {
             setUsername(response.data.username);
             setEmail(response.data.email);
             setProfilePicture(response.data.profile_picture);
@@ -66,6 +91,7 @@ function Editprofile() {
 
         formdata.append("first_name", first_name);
         formdata.append("last_name", last_name);
+        formdata.append("profile_picture", selectedProfilePicture);
         formdata.append("email", email);
         formdata.append("university", university);
         formdata.append("location", location);
@@ -76,7 +102,7 @@ function Editprofile() {
             method: "put",
             url: baseUrl + id + "/",
             data: formdata,
-            headers: { "Content-Type": "multipart/form-data" },
+            headers: { "Content-Type": "multipart/form-data",'Authorization': `JWT ${Access}` },
         })
             .then((response) => {
                 console.log(response.data);
