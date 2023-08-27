@@ -7,7 +7,16 @@ module.exports = {
     extend: {
       colors: {
         overlay: '#00242C',
-        textColor: '#F2F2F2'
+        textColor: '#F2F2F2',
+        custom1: '#050509',
+        custom2: '#170E5F',
+        custom3: '#56382E',
+        custom4: '#575353',
+        custom5: '#433491',
+        custom6: '#97584D',
+        custom7: '#92837C',
+        custom8: '#B0ACAE',
+
       }
     },
     fontFamily: {
