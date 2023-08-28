@@ -8,6 +8,8 @@ import Courses from "./courses";
 import Footer from "./footer";
 
 import { Link } from "react-router-dom"
+import { IonIcon } from "@ionic/react";
+import { chatbubbles } from "ionicons/icons";
 
 function LandingPage() {
     const [showSearchbar, setShowSearchbar] = useState(false);
@@ -111,6 +113,10 @@ function LandingPage() {
                     </Link>
                 </div>
             </section>
+            
+            <button class="fixed right-4 bottom-4 p-4 bg-[#05F26C] text-[#011C26] rounded-full text-lg font-bold shadow mr-2">Chat with us <IonIcon icon={chatbubbles} className="text-[#011C26] text-2xl"></IonIcon></button>
+            
+            
             <Courses />
             
             <Signup />
