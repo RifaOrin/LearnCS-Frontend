@@ -7,13 +7,15 @@ function ResetPass() {
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
     const [showPopup, setShowPopup] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const resetdata = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         try {
             const resp = await axios.post(Url, { email });
-            //navigate("");
-            setShowPopup(true);
+            navigate("/resetPassConfirmation");
+            
         } catch (error) {
             if (error.response.data.email !== undefined) {
                 alert(error.response.data.email);
@@ -37,7 +39,7 @@ function ResetPass() {
                         <form className="flex flex-col gap-4">
                             <input
                                 className="p-2 mt-8 rounded-xl border outline-none focus:border-2 focus:border-[#5E6055] bg-[#f3f7fa]"
-                                type="text"
+                                type="email"
                                 name="email"
                                 placeholder="Email"
                                 onChange={(e) => setEmail(e.target.value)}
@@ -73,6 +75,11 @@ function ResetPass() {
                     </div>
                 </div>
             )}
+            {isLoading && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
+        </div>
+      )}
         </body>
     );
 }

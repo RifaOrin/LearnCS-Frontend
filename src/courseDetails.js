@@ -103,6 +103,8 @@ function CourseDetails() {
         }
     };
 
+    
+
     useEffect(() => {
         if (Access != undefined) {
             axios
@@ -284,12 +286,14 @@ function CourseDetails() {
                     {instructor.map((instructorDetails) => {
                         const { id, name } = instructorDetails;
                         return (
+                            <Link to = {`/instructor/${instructorDetails.id}/${course_id}`}>
                             <p className="mt-3 text-sm">
                                 Created by{" "}
                                 <span className="underline text-[#7ED98B] cursor-pointer">
                                     {name}{" "}
                                 </span>
                             </p>
+                            </Link>
                         );
                     })}
                 </div>
@@ -485,7 +489,7 @@ function CourseDetails() {
                                             >
                                                 {isModuleEnrolled ? (
                                                     <Link
-                                                        to={`/quizquestion/${course_id}/${Modules.id}/${item.id}`}
+                                                    to={`/contentshow/${course_id}`}
                                                     >
                                                         {item.quiz_title}
                                                     </Link>
@@ -566,7 +570,9 @@ function CourseDetails() {
                     })}
                 </div>
             </div>
+            {isLoggedIn && (
             <Chaticon/>
+            )}
             <Footer />
         </body>
     );

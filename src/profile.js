@@ -10,7 +10,6 @@ import Chaticon from "./chatIcon";
 
 const Userurl = "http://127.0.0.1:8000/auth/users/me/";
 const baseUrl = `http://127.0.0.1:8000/user/`;
-const id = "1";
 function Profile() {
     //const { id } = useParams();
     const navigate = useNavigate();
@@ -28,6 +27,7 @@ function Profile() {
     const [showEnrolledCourses, setShowEnrolledCourses] = useState(false);
     const numberOfCourses = enrollcourse.length;
     const [showProfileInfo, setShowProfileInfo] = useState(true);
+    const isLoggedIn = !!userid;
     const Access = localStorage.accessToken;
 
     useEffect(() => {
@@ -88,6 +88,18 @@ function Profile() {
         setShowProfileInfo(false);
     };
 
+    const userInitials = () => {
+        if (username) {
+            const initials = username
+                .split(" ")
+                .map((name) => name.charAt(0))
+                .join("")
+                .toUpperCase();
+            return initials;
+        }
+        return ""; // Return an empty string if username is not available
+    };
+
     return (
         <body className="bg-gray-100 min-h-screen">
             <Navbar />
@@ -101,10 +113,20 @@ function Profile() {
             <div className="flex flex-col md:flex-row lg:space-x-4 pl-20 pr-20 pb-10">
                 <div className="w-full lg:w-1/4 flex flex-col space-y-8 border lg:ml-20 p-12 justify-center items-center">
                     <div className="w-40 h-40 overflow-hidden rounded-full">
-                        <img
-                            src={profile_picture}
-                            className="object-cover w-full h-full"
-                        ></img>
+                        {profile_picture ? (
+                            <img
+                                src={profile_picture}
+                                className="object-cover w-full h-full"
+                            ></img>
+                        ) : (
+                            <div className="w-full h-full rounded-full cursor-pointer bg-gray-300 flex items-center justify-center relative">
+                                {/* Display the user's username initials */}
+
+                                <span className="text-gray-700 text-3xl font-semibold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                    {userInitials()}
+                                </span>
+                            </div>
+                        )}
                     </div>
                     <div className="flex flex-col space-y-2 items-center justify-center">
                         <h1 className="text-lg lg:text-xl flex justify-center font-medium">
@@ -176,7 +198,7 @@ function Profile() {
                             {enrollcourse.map((course) => (
                                 // <li key={course.id}>
                                 <Link
-                                    to={`/courseDetails/${id}#courseDetailsStart`}
+                                    to={`/courseDetails/${course.id}#courseDetailsStart`}
                                     className="card-link"
                                 >
                                     <div className="card mt-10 hover:scale-105 transform transition-transform duration-300">
@@ -211,7 +233,7 @@ function Profile() {
                     )}
                 </div>
             </div>
-            <Chaticon/>
+            {isLoggedIn && <Chaticon />}
             <Footer />
         </body>
     );

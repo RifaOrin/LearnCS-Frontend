@@ -4,11 +4,15 @@ import axios from "axios";
 
 function Quizquestion() {
     const { course_id, module_id, quiz_id } = useParams();
+    const [userid, setUserid] = useState("");
     const [quiz, setQuiz] = useState([]);
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [correctCount, setCorrectCount] = useState(0); // Initialize count to 0
     const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate();
+    const Userurl = "http://127.0.0.1:8000/auth/users/me/";
+    const Access = localStorage.accessToken;
+    
 
     const baseUrl =
         "http://127.0.0.1:8000/course/" +
@@ -26,6 +30,25 @@ function Quizquestion() {
         "/quiz/" +
         quiz_id +
         "/quizAttempt/";
+
+    useEffect(() => {
+        axios
+            .get(Userurl, {
+                headers: {
+                    Authorization: `JWT ${Access}`,
+                },
+            })
+            .then((response) => {
+                setUserid(response.data.id)
+            
+            })
+            .catch((error) => {
+                if (error.message === "Request failed with status code 401") {
+                    navigate("/login");
+                }
+            });
+            
+    }, [Access, navigate]);
     useEffect(() => {
         axios.get(baseUrl).then((response) => {
             setQuiz(response.data);
@@ -54,7 +77,7 @@ function Quizquestion() {
 
     const saveQuizAttempt = async () => {
         const data = {
-            user: 1,
+            user: userid,
             quiz: quiz_id,
             marks_obtained: correctCount,
         };

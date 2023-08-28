@@ -4,22 +4,47 @@ import Navbar from "./navbar";
 import Chaticon from "./chatIcon";
 import Profilepic from "./images/profilePhoto.jpg";
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Instructor() {
 
     const {instructor_id} = useParams();
     const {course_id} = useParams();
-
+    const [userid, setUserid] = useState("");
     const [instructor, setInstructor] = useState([]);
     const [instructorCourse, setInstructorCourse] = useState([]);
     const [courseCount, setCourseCount] = useState(0);
     const [totalStudents, setTotalStudents] = useState(0); 
     const [error, setError] = useState("");
-
+    const navigate = useNavigate();
+    const Access = localStorage.accessToken;
+    const isLoggedIn =!! userid;
+    const Userurl = "http://127.0.0.1:8000/auth/users/me/";
     const instrrctorlink = "http://127.0.0.1:8000/course/"+course_id+"/instructor/"
     const instrrctorCourselink = "http://127.0.0.1:8000/course/teacher/"+instructor_id+"/teachings/"
+
+
+    useEffect(() => {
+        if (Access != undefined) {
+        axios
+            .get(Userurl, {
+                headers: {
+                    Authorization: `JWT ${Access}`,
+                },
+            })
+            .then((response) => {
+                setUserid(response.data.id)
+            
+            })
+            .catch((error) => {
+                if (error.message === "Request failed with status code 401") {
+                    navigate("/login");
+                }
+            });
+        }
+            
+    }, [Access, navigate]);
 
     useEffect(() => {
         axios
@@ -140,7 +165,9 @@ function Instructor() {
                 
                 </div>
             </div>
+            {isLoggedIn && (
             <Chaticon/>
+            )}
             <Footer />
         </body>
     );
