@@ -8,6 +8,7 @@ function Quizquestion() {
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [correctCount, setCorrectCount] = useState(0); // Initialize count to 0
     const [showPopup, setShowPopup] = useState(false);
+    const navigate = useNavigate();
 
     const baseUrl =
         "http://127.0.0.1:8000/course/" +
@@ -167,12 +168,12 @@ function Quizquestion() {
                 >
                     Submit Answers
                 </button>
-                <Link
+                <button
                     className="block mt-4 text-[#13974c] hover:underline"
-                    to="/"
+                    onClick={() => navigate(-1)}
                 >
                     Go back
-                </Link>
+                </button>
                 </div>
             </div>
             {showPopup && (
