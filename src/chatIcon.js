@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Chat from "./chat";
 import { IonIcon } from "@ionic/react";
 import { chatbubbles } from "ionicons/icons";
 

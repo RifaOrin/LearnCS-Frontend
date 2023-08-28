@@ -6,7 +6,6 @@ import Searchbar from "./searchbar";
 import Signup from "./signup";
 import Courses from "./courses";
 import Footer from "./footer";
-import Chat from "./chat";
 import Chaticon from "./chatIcon";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,7 +13,7 @@ import { useEffect } from "react";
 
 
 import { IonIcon } from "@ionic/react";
-import { chatbubbles } from "ionicons/icons";
+import { chatbubbles, logOut } from "ionicons/icons";
 const Userurl = "http://127.0.0.1:8000/auth/users/me/";
 const baseUrl = `http://127.0.0.1:8000/user/`;
 
@@ -76,7 +75,9 @@ function LandingPage() {
         <body>
             <div className=" h-21  bg-[#00242cc9] pl-16 pr-10 py-0.25 absolute z-20">
                 <nav className=" flex items-center justify-between">
+                    
                     <img src={Logo} className="w-1/6 h-21 cursor-pointer"></img>
+                    
                     <ul className="flex-1 text-right">
                         <li className="list-none inline-block px-5">
                             <Link
@@ -134,17 +135,17 @@ function LandingPage() {
                     <img
                         src={profile_picture}
                         alt="Profile"
-                        className="w-10 h-10 rounded-full cursor-pointer"
+                        className="w-10 h-10 rounded-full cursor-pointer ml-4 mr-4"
                     />
                     </Link>
                 )}
                 {isLoggedIn && (
-                            <div className="ml-4">
+                            <div className="ml-4 mt-2">
                                 <button
                                     onClick={handleLogout}
-                                    className="hidden lg:block text-white text-md font-semibold mr-4 hover:text-[#05F26C]"
+                                    className="hidden lg:block text-white mr-4 hover:text-[#05F26C]"
                                 >
-                                    Logout
+                                    <IonIcon icon={logOut} className="text-3xl"></IonIcon>
                                 </button>
                             </div>
                         )}

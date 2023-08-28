@@ -3,6 +3,8 @@ import { Link,useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import { IonIcon } from "@ionic/react";
+import { logOut } from "ionicons/icons";
 const Userurl = "http://127.0.0.1:8000/auth/users/me/";
 const baseUrl = `http://127.0.0.1:8000/user/`;
 
@@ -119,12 +121,12 @@ function Navbar(){
                             />
                         </Link>
                         {isLoggedIn && (
-                            <div className="ml-4">
+                            <div className="ml-4 mt-2">
                                 <button
                                     onClick={handleLogout}
-                                    className="hidden lg:block text-white text-md font-semibold mr-4 hover:text-[#05F26C]"
+                                    className="hidden lg:block text-white mr-4 hover:text-[#05F26C]"
                                 >
-                                    Logout
+                                    <IonIcon icon={logOut} className="text-3xl"></IonIcon>
                                 </button>
                             </div>
                         )}
