@@ -6,11 +6,13 @@ import Searchbar from "./searchbar";
 import Signup from "./signup";
 import Courses from "./courses";
 import Footer from "./footer";
+import Chat from "./chat";
+import Chaticon from "./chatIcon";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-import { Link } from "react-router-dom"
+
 import { IonIcon } from "@ionic/react";
 import { chatbubbles } from "ionicons/icons";
 const Userurl = "http://127.0.0.1:8000/auth/users/me/";
@@ -189,9 +191,7 @@ function LandingPage() {
                     </Link>
                 </div>
             </section>
-            
-            <button class="fixed right-4 bottom-4 p-4 bg-[#05F26C] text-[#011C26] rounded-full text-lg font-bold shadow mr-2">Chat with us <IonIcon icon={chatbubbles} className="text-[#011C26] text-2xl"></IonIcon></button>
-            
+            <Chaticon/>
             
             <Courses />
             

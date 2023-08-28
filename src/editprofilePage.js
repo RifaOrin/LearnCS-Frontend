@@ -2,6 +2,7 @@
 import { IonIcon } from "@ionic/react";
 import Footer from "./footer";
 import Navbar from "./navbar";
+import Chaticon from "./chatIcon";
 import {
     personOutline,
     paperPlaneOutline,
@@ -250,6 +251,7 @@ function Editprofile() {
                     </div>
                 </div>
             </div>
+            <Chaticon/>
             <Footer />
         </body>
     );

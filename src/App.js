@@ -15,6 +15,7 @@ import Instructor from "./instructor";
 import Quizquestion from "./quizquestion";
 import ContentShow from "./contentshow";
 import Chat from "./chat";
+import Chaticon from "./chatIcon";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -70,6 +71,8 @@ function App() {
                         element={<Quizquestion />}
                     ></Route>
                     <Route path="/contentshow/:course_id" element={<ContentShow />}></Route>
+
+                    <Route path="/chatIcon" element={<Chaticon />}></Route>
                 </Routes>
             </div>
         </Router>

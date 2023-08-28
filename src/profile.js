@@ -1,11 +1,12 @@
 import Profilepic from "./images/profilePhoto.jpg";
 import { IonIcon } from "@ionic/react";
 import Footer from "./footer";
-import { caretForwardCircleOutline } from "ionicons/icons";
+import { caretForwardCircleOutline, chatbubbles } from "ionicons/icons";
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./navbar";
+import Chaticon from "./chatIcon";
 
 const Userurl = "http://127.0.0.1:8000/auth/users/me/";
 const baseUrl = `http://127.0.0.1:8000/user/`;
@@ -210,6 +211,7 @@ function Profile() {
                     )}
                 </div>
             </div>
+            <Chaticon/>
             <Footer />
         </body>
     );

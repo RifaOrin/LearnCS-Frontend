@@ -1,6 +1,7 @@
 import { IonIcon } from "@ionic/react";
 import Footer from "./footer";
 import Navbar from "./navbar";
+import Chaticon from "./chatIcon";
 import Profilepic from "./images/profilePhoto.jpg";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
@@ -139,6 +140,7 @@ function Instructor() {
                 
                 </div>
             </div>
+            <Chaticon/>
             <Footer />
         </body>
     );

@@ -10,8 +10,11 @@ import {
     logoYoutube,
     documentTextOutline,
     helpCircleOutline,
+    lockClosedOutline,
+    lockClosed
 } from "ionicons/icons";
 import Navbar from "./navbar";
+import Chaticon from "./chatIcon";
 import Footer from "./footer";
 const baseUrl = `http://127.0.0.1:8000/course/`;
 const Userurl = "http://127.0.0.1:8000/auth/users/me/";
@@ -397,10 +400,14 @@ function CourseDetails() {
                                     {/* Show videos */}
 
                                     <div className="inline-flex pl-3 pb-3 pt-3 space-x-2">
+                                    {isModuleEnrolled ? (
                                         <IonIcon
                                             icon={logoYoutube}
                                             className="text-xl"
-                                        />
+                                        />) : (<IonIcon
+                                            icon={lockClosed}
+                                            className="text-xl"
+                                        />)}
                                         {video.map((item) => (
                                             <p
                                                 className="text-sm text-gray-600"
@@ -428,10 +435,14 @@ function CourseDetails() {
                                     {/* Show PDFs */}
 
                                     <div className="inline-flex pl-3 pb-3 pt-3 space-x-2">
+                                    {isModuleEnrolled ? (
                                         <IonIcon
                                             icon={documentTextOutline}
                                             className="text-xl"
-                                        />
+                                        />) : (<IonIcon
+                                            icon={lockClosed}
+                                            className="text-xl"
+                                        />)}
                                         {pdf.map((item) => (
                                             <p
                                                 className="text-sm text-gray-600"
@@ -459,10 +470,14 @@ function CourseDetails() {
                                     {/* Show quizzes */}
 
                                     <div className="inline-flex pl-3 pb-3 pt-3 space-x-2">
+                                    {isModuleEnrolled ? (
                                         <IonIcon
                                             icon={helpCircleOutline}
                                             className="text-xl"
-                                        />
+                                        />) : (<IonIcon
+                                            icon={lockClosed}
+                                            className="text-xl"
+                                        />)}
                                         {quiz.map((item) => (
                                             <p
                                                 className=" text-sm text-gray-600"
@@ -551,7 +566,7 @@ function CourseDetails() {
                     })}
                 </div>
             </div>
-
+            <Chaticon/>
             <Footer />
         </body>
     );
