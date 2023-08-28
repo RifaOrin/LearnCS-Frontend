@@ -1,14 +1,73 @@
 import Logo from "./images/default1.png";
-import { Link } from "react-router-dom"
-
-
+import { Link,useNavigate } from "react-router-dom"
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
+const Userurl = "http://127.0.0.1:8000/auth/users/me/";
+const baseUrl = `http://127.0.0.1:8000/user/`;
 
 
 function Navbar(){
+    const navigate = useNavigate();
+    const [userid, setUserid] = useState("");
+    const [showSearchbar, setShowSearchbar] = useState(false);
+    const [profile_picture, setProfilePicture] = useState("");
+    const toggleSearchbar = () => {
+        setShowSearchbar(!showSearchbar);
+    };
+    const isLoggedIn =!! userid;
+    const Access = localStorage.accessToken;
+
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        setUserid("");
+        navigate("/");
+    };
+
+    useEffect(() =>{
+        if (Access != undefined) {
+            axios
+                .get(Userurl, {
+                    headers: {
+                        Authorization: `JWT ${Access}`,
+                    },
+                })
+                .then((response) => {
+                    setUserid(response.data.id);
+                    axios
+                    .get(baseUrl + response.data.id, {
+                        headers: {
+                            Authorization: `JWT ${Access}`,
+                        },
+                    })
+                    .then((response) => {
+                        setProfilePicture(response.data.profile_picture);
+                    })
+                    .catch((error) => {
+                        if (
+                            error.message ===
+                            "Request failed with status code 401"
+                        ) {
+                            navigate("/login");
+                        }
+                    });
+                })
+                .catch((error) => {
+                    if (
+                        error.message === "Request failed with status code 401"
+                    ) {
+                        navigate("/login");
+                    }
+                });
+        }
+    }, [Access, navigate])
+
     return(
         <nav className="bg-[#012326] p-4 flex items-center justify-between">
             <div className="flex items-center">
+            <Link to = "/">
             <img src={Logo} className="w-40 cursor-pointer"></img>
+            </Link>
             </div>
             <div className="flex-grow md:flex md:items-center md:w-1/2">
             <div className="relative md:pl-10 w-64 md:w-auto">
@@ -44,9 +103,35 @@ function Navbar(){
             </div>
             <div className="md:flex md:items-center">
                 <Link to = "/courses" className="hidden lg:block text-white text-md font-semibold mr-4 hover:text-[#05F26C]">Explore Courses</Link>
+                {isLoggedIn ? null : (
+                        <>
                 <Link to="/login" ><button className="hidden lg:block text-white text-md font-semibold mr-4 hover:text-[#05F26C]">Sign In</button></Link>
                 <Link to = "/signup"><button className="text-[#012326] font-bold mr-4 outline-none px-5 py-2 rounded-sm bg-[#05F26C] hover:bg-[#07cc5c]">Sign Up</button></Link>
+                </>
+                )}
+                 {profile_picture && (
+                    <div className="flex items-center">
+                        <Link to="/profile">
+                            <img
+                                src={profile_picture}
+                                alt="Profile"
+                                className="w-10 h-10 rounded-full cursor-pointer"
+                            />
+                        </Link>
+                        {isLoggedIn && (
+                            <div className="ml-4">
+                                <button
+                                    onClick={handleLogout}
+                                    className="hidden lg:block text-white text-md font-semibold mr-4 hover:text-[#05F26C]"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
+            
         </nav>
 
 

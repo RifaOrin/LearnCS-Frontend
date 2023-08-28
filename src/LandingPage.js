@@ -6,14 +6,67 @@ import Searchbar from "./searchbar";
 import Signup from "./signup";
 import Courses from "./courses";
 import Footer from "./footer";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-import { Link } from "react-router-dom"
+const Userurl = "http://127.0.0.1:8000/auth/users/me/";
+const baseUrl = `http://127.0.0.1:8000/user/`;
 
 function LandingPage() {
+    const navigate = useNavigate();
+    const [userid, setUserid] = useState("");
     const [showSearchbar, setShowSearchbar] = useState(false);
+    const [profile_picture, setProfilePicture] = useState("");
     const toggleSearchbar = () => {
         setShowSearchbar(!showSearchbar);
     };
+    const isLoggedIn =!! userid;
+    const Access = localStorage.accessToken;
+
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        setUserid("");
+        window.location.reload();
+    };
+
+    useEffect(() =>{
+        if (Access != undefined) {
+            axios
+                .get(Userurl, {
+                    headers: {
+                        Authorization: `JWT ${Access}`,
+                    },
+                })
+                .then((response) => {
+                    setUserid(response.data.id);
+                    axios
+                    .get(baseUrl + response.data.id, {
+                        headers: {
+                            Authorization: `JWT ${Access}`,
+                        },
+                    })
+                    .then((response) => {
+                        setProfilePicture(response.data.profile_picture);
+                    })
+                    .catch((error) => {
+                        if (
+                            error.message ===
+                            "Request failed with status code 401"
+                        ) {
+                            navigate("/login");
+                        }
+                    });
+                })
+                .catch((error) => {
+                    if (
+                        error.message === "Request failed with status code 401"
+                    ) {
+                        navigate("/login");
+                    }
+                });
+        }
+    }, [Access, navigate])
     return (
         <body>
             <div className=" h-21  bg-[#00242cc9] pl-16 pr-10 py-0.25 absolute z-20">
@@ -44,30 +97,52 @@ function LandingPage() {
                                 Contact
                             </Link>
                         </li>
-                        <li className="list-none inline-block px-5">
-                            <Link to="./login" >
-                                <button
-                                type="button"
-                                className="text-[#7ED98B] hover:text-[#498C60] inline-block text-lg font-semibold px-3 py-3"
-                                >
-                                Log In
-                                </button>
-                            </Link>
-                        </li>
-                        <li className="list-none inline-block px-5">
-                            <Link to = "./signup">
-                                <button
-                                type="button"
-                                className="text-[#7ED98B] hover:text-[#498C60] inline-block text-lg font-semibold px-3 py-3"
-                                >
-                                Sign Up
-                                </button>
-                            </Link>
-                        </li>
+                        {isLoggedIn ? null : (
+                        <>
+                            <li className="list-none inline-block px-5">
+                                <Link to="./login">
+                                    <button
+                                        type="button"
+                                        className="text-[#7ED98B] hover:text-[#498C60] inline-block text-lg font-semibold px-3 py-3"
+                                    >
+                                        Log In
+                                    </button>
+                                </Link>
+                            </li>
+                            <li className="list-none inline-block px-5">
+                                <Link to="./signup">
+                                    <button
+                                        type="button"
+                                        className="text-[#7ED98B] hover:text-[#498C60] inline-block text-lg font-semibold px-3 py-3"
+                                    >
+                                        Sign Up
+                                    </button>
+                                </Link>
+                            </li>
+                        </>
+                    )}
                         
                     </ul>
                     <Searchbar/>
-
+                    {profile_picture&& (
+                    <Link to = "./profile">
+                    <img
+                        src={profile_picture}
+                        alt="Profile"
+                        className="w-10 h-10 rounded-full cursor-pointer"
+                    />
+                    </Link>
+                )}
+                {isLoggedIn && (
+                            <div className="ml-4">
+                                <button
+                                    onClick={handleLogout}
+                                    className="hidden lg:block text-white text-md font-semibold mr-4 hover:text-[#05F26C]"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        )}
                     
                 </nav>
             </div>

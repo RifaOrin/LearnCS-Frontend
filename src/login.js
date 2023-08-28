@@ -26,7 +26,7 @@ function LoginPage() {
                     "accessToken",
                     response.data.access
                 );
-                navigate("/courses");
+                navigate("/");
             })
             .catch((error) => {
                 if (error.message === "Request failed with status code 401") {

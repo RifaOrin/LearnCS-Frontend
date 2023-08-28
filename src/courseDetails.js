@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IonIcon } from "@ionic/react";
 import {
@@ -11,11 +11,14 @@ import {
     documentTextOutline,
     helpCircleOutline,
 } from "ionicons/icons";
+import Navbar from "./navbar";
 import Footer from "./footer";
 const baseUrl = `http://127.0.0.1:8000/course/`;
-//console.log("hello");
+const Userurl = "http://127.0.0.1:8000/auth/users/me/";
 
 function CourseDetails() {
+    const navigate = useNavigate();
+    const [userid, setUserid] = useState("");
     const { course_id } = useParams();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -33,13 +36,34 @@ function CourseDetails() {
     const [instructorCourse, setInstructorCourse] = useState([]);
     const [courseCount, setCourseCount] = useState(0);
     const [totalStudents, setTotalStudents] = useState(0);
+    const [isEnrolled, setIsEnrolled] = useState(false);
+    const [showEnrollmentPopup, setShowEnrollmentPopup] = useState(false);
+    const [showLoginPopup, setShowLoginPopup] = useState(false);
+    const [isLoggedIn, setIsLoggedin] = useState(false);
 
     const [isError, setIsError] = useState("");
-
     const [expandedModuleId, setExpandedModuleId] = useState(null);
+    const Access = localStorage.accessToken;
     const instrrctorCourselink =
         "http://127.0.0.1:8000/course/teacher/" + instructorId + "/teachings/";
+    const enrollmenturl =
+        "http://127.0.0.1:8000/course/" + course_id + "/enrollment/";
 
+    const handleEnrollmentPopup = () => {
+        setShowEnrollmentPopup(true);
+    };
+
+    const closeEnrollmentPopup = () => {
+        setShowEnrollmentPopup(false);
+    };
+
+    const handleLoginPopup = () => {
+        setShowLoginPopup(true);
+    };
+
+    const closeLoginPopup = () => {
+        setShowLoginPopup(false);
+    };
     // Function to toggle the dropdown visibility
     const toggleModuleDropdown = (moduleId) => {
         if (expandedModuleId === moduleId) {
@@ -51,7 +75,51 @@ function CourseDetails() {
         }
     };
 
+    const handleEnroll = () => {
+        if (!isLoggedIn) {
+            setShowLoginPopup(true);
+            
+        }
+        else{
+        const enrollmentData = {
+            course: course_id,
+            user: userid,
+        };
+
+        axios
+            .post(enrollmenturl, enrollmentData)
+            .then((response) => {
+                // Handle successful enrollment
+                setIsEnrolled(true);
+                window.location.reload();
+            })
+            .catch((error) => {
+                // Handle enrollment error
+                console.error("Error enrolling:", error);
+            });
+        }
+    };
+
     useEffect(() => {
+        if (Access != undefined) {
+            axios
+                .get(Userurl, {
+                    headers: {
+                        Authorization: `JWT ${Access}`,
+                    },
+                })
+                .then((response) => {
+                    setUserid(response.data.id);
+                    setIsLoggedin(true);
+                })
+                .catch((error) => {
+                    if (
+                        error.message === "Request failed with status code 401"
+                    ) {
+                        navigate("/login");
+                    }
+                });
+        }
         axios
             .get(baseUrl + course_id + "/")
             .then((response) => {
@@ -83,6 +151,25 @@ function CourseDetails() {
             element.scrollIntoView({ behavior: "smooth" });
         }
     }, [course_id]);
+
+    useEffect(() => {
+        // Fetch enrollment data
+        axios
+            .get(enrollmenturl)
+            .then((response) => {
+                const enrollmentData = response.data;
+                const enrolledUserIds = enrollmentData.map(
+                    (enrollment) => enrollment.user
+                );
+                if (enrolledUserIds.includes(userid)) {
+                    setIsEnrolled(true);
+                }
+            })
+            .catch((error) => {
+                // Handle error
+                console.error("Error fetching enrollment data:", error);
+            });
+    }, [userid]);
 
     useEffect(() => {
         if (instructorId) {
@@ -141,8 +228,51 @@ function CourseDetails() {
         }
     }, [expandedModuleId, course_id]);
 
+    const EnrollmentPopup = () => {
+        return (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="bg-white p-8 rounded-lg">
+                    <h2 className="text-xl font-bold mb-2 text-center pb-5">
+                        Enrollment Required
+                    </h2>
+                    <p className="mb-4 text-center">
+                        Please enroll in the course to access the content.
+                    </p>
+                    <button
+                        className="bg-[#072746] text-white font-semibold px-4 py-2 rounded hover:bg-[#072746]"
+                        onClick={closeEnrollmentPopup}
+                    >
+                        Close
+                    </button>
+                </div>
+            </div>
+        );
+    };
+
+    const LoginPopup = () => {
+        return (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="bg-white p-8 rounded-lg">
+                    <h2 className="text-xl font-bold mb-2 text-center pb-5">
+                        Login Required
+                    </h2>
+                    <p className="mb-4 text-center">
+                        Please Login First
+                    </p>
+                    <button
+                        className="bg-[#072746] text-white font-semibold px-4 py-2 rounded hover:bg-[#072746]"
+                        onClick={closeLoginPopup}
+                    >
+                        Close
+                    </button>
+                </div>
+            </div>
+        );
+    };
+
     return (
-        <div id="courseDetailsStart">
+        <body id="courseDetailsStart">
+            <Navbar />
             <div className="w-full flex flex-row bg-[#012326] pb-5">
                 <div className="pl-40 w-3/4 pt-20 pr-10 text-white">
                     <h1 className="text-4xl font-bold mb-5">{title}</h1>
@@ -190,25 +320,28 @@ function CourseDetails() {
                     </div>
                 </div>
 
-                <div className=" max-w-sm p-10 ml-10 mt-10 mr-20 border border-gray-200 rounded-lg shadow-lg">
-                    <h2 className="mb-2 pb-3 text-2xl font-bold tracking-tight text-gray-900">
-                        $33.08
-                    </h2>
-                    <a
-                        className="px-7 py-3 sm:px-3 sm:py-2 text-sm font-bold text-center text-white bg-[#4f975a] rounded-sm hover:bg-[#316439]"
-                        href=""
-                    >
-                        Buy Now
-                    </a>
-                    <p className="text-xs font-medium text-gray-500 pt-5">
-                        Aren't member?
-                    </p>
-                    <Link to="/signup">
-                        <p className="text-xs font-semibold underline text-[#4f975a]">
-                            Join for free
+                {!isEnrolled && (
+                    <div className=" max-w-sm p-10 ml-10 mt-10 mr-20 border border-gray-200 rounded-lg shadow-lg">
+                        {/* <h2 className="mb-2 pb-3 text-2xl font-bold tracking-tight text-gray-900">
+                            $33.08
+                        </h2> */}
+                        <button
+                            className="px-7 py-3 sm:px-3 sm:py-2 text-sm font-bold text-center text-white bg-[#4f975a] rounded-sm hover:bg-[#316439]"
+                            href=""
+                            onClick={handleEnroll}
+                        >
+                            Enrollment
+                        </button>
+                        <p className="text-xs font-medium text-gray-500 pt-5">
+                            Aren't member?
                         </p>
-                    </Link>
-                </div>
+                        <Link to="/signup">
+                            <p className="text-xs font-semibold underline text-[#4f975a]">
+                                Join for free
+                            </p>
+                        </Link>
+                    </div>
+                )}
             </div>
 
             <div className="w-3/4 pl-40 pt-5">
@@ -236,9 +369,13 @@ function CourseDetails() {
             <h2 className="text-2xl font-semibold pt-10 pl-40 mb-3">
                 Course Content
             </h2>
+            {showEnrollmentPopup && <EnrollmentPopup />}
+            {showLoginPopup && <LoginPopup/>}
             {module.map((Modules) => {
                 const { id, name } = Modules;
                 const module_id = id;
+
+                const isModuleEnrolled = isEnrolled;
                 return (
                     <div className="w-3/4 pl-40 " key={id}>
                         <div
@@ -269,11 +406,22 @@ function CourseDetails() {
                                                 className="text-sm text-gray-600"
                                                 key={item.id}
                                             >
-                                                <Link
-                                                    to={`/contentshow/${course_id}`}
-                                                >
-                                                    {item.title}
-                                                </Link>
+                                                {isModuleEnrolled ? (
+                                                    <Link
+                                                        to={`/contentshow/${course_id}`}
+                                                    >
+                                                        {item.title}
+                                                    </Link>
+                                                ) : (
+                                                    <span
+                                                        className="cursor-pointer"
+                                                        onClick={
+                                                            handleEnrollmentPopup
+                                                        }
+                                                    >
+                                                        {item.title}
+                                                    </span>
+                                                )}
                                             </p>
                                         ))}
                                     </div>
@@ -285,16 +433,27 @@ function CourseDetails() {
                                             className="text-xl"
                                         />
                                         {pdf.map((item) => (
-                                            <Link
-                                                to={`/contentshow/${course_id}`}
+                                            <p
+                                                className="text-sm text-gray-600"
+                                                key={item.id}
                                             >
-                                                <p
-                                                    className="text-sm text-gray-600"
-                                                    key={item.id}
-                                                >
-                                                    {item.title}
-                                                </p>
-                                            </Link>
+                                                {isModuleEnrolled ? (
+                                                    <Link
+                                                        to={`/contentshow/${course_id}`}
+                                                    >
+                                                        {item.title}
+                                                    </Link>
+                                                ) : (
+                                                    <span
+                                                        className="cursor-pointer"
+                                                        onClick={
+                                                            handleEnrollmentPopup
+                                                        }
+                                                    >
+                                                        {item.title}
+                                                    </span>
+                                                )}
+                                            </p>
                                         ))}
                                     </div>
                                     {/* Show quizzes */}
@@ -305,16 +464,27 @@ function CourseDetails() {
                                             className="text-xl"
                                         />
                                         {quiz.map((item) => (
-                                            <Link
-                                                to={`/quizquestion/${course_id}/${Modules.id}/${item.id}`}
+                                            <p
+                                                className=" text-sm text-gray-600"
+                                                key={item.id}
                                             >
-                                                <p
-                                                    className=" text-sm text-gray-600"
-                                                    key={item.id}
-                                                >
-                                                    {item.quiz_title}
-                                                </p>
-                                            </Link>
+                                                {isModuleEnrolled ? (
+                                                    <Link
+                                                        to={`/quizquestion/${course_id}/${Modules.id}/${item.id}`}
+                                                    >
+                                                        {item.quiz_title}
+                                                    </Link>
+                                                ) : (
+                                                    <span
+                                                        className="cursor-pointer"
+                                                        onClick={
+                                                            handleEnrollmentPopup
+                                                        }
+                                                    >
+                                                        {item.quiz_title}
+                                                    </span>
+                                                )}
+                                            </p>
                                         ))}
                                     </div>
                                 </div>
@@ -347,10 +517,10 @@ function CourseDetails() {
                                 </p>
                                 <div className="flex flex-row">
                                     <div className="w-40 h-40 overflow-hidden rounded-full">
-                                    <img
-                                        className="object-cover w-full h-full"
-                                        src={photo}
-                                    />
+                                        <img
+                                            className="object-cover w-full h-full"
+                                            src={photo}
+                                        />
                                     </div>
                                     <div className="pl-10 pt-20 flex flex-col">
                                         <div className="inline-flex space-x-2">
@@ -383,7 +553,7 @@ function CourseDetails() {
             </div>
 
             <Footer />
-        </div>
+        </body>
     );
 }
 
