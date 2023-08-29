@@ -13,8 +13,8 @@ import {
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-const baseUrl = `http://127.0.0.1:8000/user/`;
-const Userurl = "http://127.0.0.1:8000/auth/users/me/"
+const baseUrl = `https://kasifzisan.pythonanywhere.com/user/`;
+const Userurl = "https://kasifzisan.pythonanywhere.com/auth/users/me/"
 function Editprofile() {
     const { id } = useParams();
     const [userid, setUserid] = useState("");

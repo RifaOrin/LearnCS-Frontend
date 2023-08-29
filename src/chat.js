@@ -7,8 +7,8 @@ import Navbar from "./navbar";
 import axios from "axios";
 import { send } from "ionicons/icons";
 import { useParams, Link, useNavigate } from "react-router-dom";
-const Userurl = "http://127.0.0.1:8000/auth/users/me/";
-const baseUrl = `http://127.0.0.1:8000/user/`;
+const Userurl = "https://kasifzisan.pythonanywhere.com/auth/users/me/";
+const baseUrl = `https://kasifzisan.pythonanywhere.com/user/`;
 
 function Chat() {
     const navigate = useNavigate();

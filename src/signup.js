@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import {  Link } from "react-router-dom";
-const Url = "http://127.0.0.1:8000/auth/users/";
+const Url = "https://kasifzisan.pythonanywhere.com/auth/users/";
 
 function Signup() {
   
