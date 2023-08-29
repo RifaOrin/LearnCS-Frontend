@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import Navbar from "./navbar";
 
 const url = "http://127.0.0.1:8000/course/";
 
@@ -16,6 +17,7 @@ function SearchResult() {
     });
     return (
         <body className="bg-[#F2F2F2] min-h-screen">
+            <Navbar />
             <div className="course-container max-w-5xl mx-auto my-0 px-20 py-20 bg-[#F2F2F2]">
                 <h2
                     className="course-heading font-poppins font-bold text-center text-[#012326] text-4xl pb-20"

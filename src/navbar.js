@@ -12,10 +12,16 @@ const baseUrl = `http://127.0.0.1:8000/user/`;
 function Navbar(){
     const navigate = useNavigate();
     const [userid, setUserid] = useState("");
+    const [username, setUsername] = useState("");
     const [showSearchbar, setShowSearchbar] = useState(false);
     const [profile_picture, setProfilePicture] = useState("");
     const toggleSearchbar = () => {
         setShowSearchbar(!showSearchbar);
+    };
+    const [searchValue, setSearchValue] = useState("");
+
+    const handleChange = (e) => {
+        setSearchValue(e.target.value);
     };
     const isLoggedIn =!! userid;
     const Access = localStorage.accessToken;
@@ -24,6 +30,17 @@ function Navbar(){
         localStorage.removeItem("accessToken");
         setUserid("");
         navigate("/");
+    };
+    const userInitials = () => {
+        if (username) {
+            const initials = username
+                .split(" ")
+                .map((name) => name.charAt(0))
+                .join("")
+                .toUpperCase();
+            return initials;
+        }
+        return ""; // Return an empty string if username is not available
     };
 
     useEffect(() =>{
@@ -44,6 +61,7 @@ function Navbar(){
                     })
                     .then((response) => {
                         setProfilePicture(response.data.profile_picture);
+                        setUsername(response.data.username);
                     })
                     .catch((error) => {
                         if (
@@ -73,34 +91,30 @@ function Navbar(){
             </div>
             <div className="flex-grow md:flex md:items-center md:w-1/2">
             <div className="relative md:pl-10 w-64 md:w-auto">
-            <button className="absolute right-2 md:left-12 top-1/2 transform -translate-y-1/2">
-                <svg
-                className="w-5 h-5 text-white"
+    <div className="absolute right-2 md:left-12 top-1/2 transform -translate-y-1/2">
+        <Link to={`/searchResult/${searchValue}`}>
+            <svg
+                className="w-5 h-5 text-white cursor-pointer"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
-                >
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 21l-4.35-4.35"
-                ></path>
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16z"
-                ></path>
-                </svg>
-            </button>
-            <input
-                type="text"
-                placeholder="Search for courses"
-                className="hidden md:inline-block bg-[#012326] placeholder-white text-white border-2 outline-none rounded-sm py-2 px-4 w-full  pl-10"
-            />
-            </div>
+            >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-4.35-4.35"></path>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 18a8 8 0 100-16 8 8 0 000 16z"></path>
+            </svg>
+        </Link>
+    </div>
+    <input
+        type="text"
+        placeholder="Search for courses"
+        id="search"
+        className="hidden md:inline-block bg-[#012326] placeholder-white text-white border-2 outline-none rounded-sm py-2 px-4 w-full  pl-10"
+        value={searchValue}
+        onChange={handleChange}
+    />
+</div>
+
 
             </div>
             <div className="md:flex md:items-center">
@@ -111,16 +125,27 @@ function Navbar(){
                 <Link to = "/signup"><button className="text-[#012326] font-bold mr-4 outline-none px-5 py-2 rounded-sm bg-[#05F26C] hover:bg-[#07cc5c]">Sign Up</button></Link>
                 </>
                 )}
-                 {profile_picture && (
-                    <div className="flex items-center">
-                        <Link to="/profile">
-                            <img
-                                src={profile_picture}
-                                alt="Profile"
-                                className="w-10 h-10 rounded-full cursor-pointer"
-                            />
-                        </Link>
-                        {isLoggedIn && (
+                 {profile_picture ? (
+                <Link to="/profile">
+                    <img
+                        src={profile_picture}
+                        alt="Profile"
+                        className="w-10 h-10 rounded-full cursor-pointer ml-4 mr-4"
+                    />
+                </Link>
+            ) : (
+                isLoggedIn && (
+                <div className="w-10 h-10 rounded-full cursor-pointer ml-4 mr-4 flex items-center justify-center bg-gray-300">
+                    {/* Display the user's username initials */}
+                    <Link to="/profile">
+                    <span className="text-gray-700 text-lg font-semibold">
+                        {userInitials()}
+                    </span>
+                    </Link>
+                </div>
+                )
+            )}
+                {isLoggedIn && (
                             <div className="ml-4 mt-2">
                                 <button
                                     onClick={handleLogout}
@@ -130,8 +155,6 @@ function Navbar(){
                                 </button>
                             </div>
                         )}
-                    </div>
-                )}
             </div>
             
         </nav>

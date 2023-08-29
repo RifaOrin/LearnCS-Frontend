@@ -20,6 +20,7 @@ const baseUrl = `http://127.0.0.1:8000/user/`;
 function LandingPage() {
     const navigate = useNavigate();
     const [userid, setUserid] = useState("");
+    const [username, setUsername] = useState("");
     const [showSearchbar, setShowSearchbar] = useState(false);
     const [profile_picture, setProfilePicture] = useState("");
     const toggleSearchbar = () => {
@@ -32,6 +33,18 @@ function LandingPage() {
         localStorage.removeItem("accessToken");
         setUserid("");
         window.location.reload();
+    };
+
+    const userInitials = () => {
+        if (username) {
+            const initials = username
+                .split(" ")
+                .map((name) => name.charAt(0))
+                .join("")
+                .toUpperCase();
+            return initials;
+        }
+        return ""; // Return an empty string if username is not available
     };
 
     useEffect(() =>{
@@ -52,6 +65,7 @@ function LandingPage() {
                     })
                     .then((response) => {
                         setProfilePicture(response.data.profile_picture);
+                        setUsername(response.data.username);
                     })
                     .catch((error) => {
                         if (
@@ -130,15 +144,26 @@ function LandingPage() {
                         
                     </ul>
                     <Searchbar/>
-                    {profile_picture&& (
-                    <Link to = "./profile">
+                    {profile_picture ? (
+                <Link to="/profile">
                     <img
                         src={profile_picture}
                         alt="Profile"
                         className="w-10 h-10 rounded-full cursor-pointer ml-4 mr-4"
                     />
+                </Link>
+            ) : (
+                isLoggedIn && (
+                <div className="w-10 h-10 rounded-full cursor-pointer ml-4 mr-4 flex items-center justify-center bg-gray-300">
+                    {/* Display the user's username initials */}
+                    <Link to="/profile">
+                    <span className="text-gray-700 text-lg font-semibold">
+                        {userInitials()}
+                    </span>
                     </Link>
-                )}
+                </div>
+                )
+            )}
                 {isLoggedIn && (
                             <div className="ml-4 mt-2">
                                 <button
@@ -192,11 +217,14 @@ function LandingPage() {
                     </Link>
                 </div>
             </section>
+            {isLoggedIn && (
             <Chaticon/>
+            )}
             
             <Courses />
-            
+            {isLoggedIn ? null : (
             <Signup />
+            )}
             <Footer />
             
             

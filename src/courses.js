@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Chaticon from "./chatIcon";
+import Navbar from "./navbar";
+//import isLoggedIn from "./LandingPage";
 
 function Courses() {
     const url = "http://127.0.0.1:8000/course/";
@@ -61,6 +64,7 @@ function Courses() {
 
     return (
         <body className="bg-[#012326] ">
+            
             <div className="course-container w-full lg:max-w-5xl mx-auto my-0 px-20 py-20 bg-[#012326]">
                 <h2
                     className="text-3xl md:text-4xl lg:text-5xl course-heading font-poppins font-bold text-center text-white mb-20"
@@ -190,6 +194,9 @@ function Courses() {
                     )}
                 </div>
             </div>
+            {/* {isLoggedIn && (
+            <Chaticon/>
+            )} */}
         </body>
     );
 }

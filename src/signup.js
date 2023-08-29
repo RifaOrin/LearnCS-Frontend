@@ -1,15 +1,16 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 const Url = "http://127.0.0.1:8000/auth/users/";
 
 function Signup() {
-  const navigate = useNavigate();
+  
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [re_password, setRe_Password] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const userData = {
     username,
@@ -19,6 +20,7 @@ function Signup() {
   };
   const signin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const resp = await axios.post(Url, userData);
       setShowPopup(true);
@@ -36,6 +38,8 @@ function Signup() {
         alert(error.response.data.re_password);
       }
     }
+
+    setIsLoading(false);
   };
   return (
     <body>
@@ -147,6 +151,11 @@ function Signup() {
         </div>
         </div>
       </div>
+      {isLoading && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
+        </div>
+      )}
       {showPopup && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 max-w-sm mx-auto shadow-lg">
