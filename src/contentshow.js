@@ -9,8 +9,8 @@ import Navbar from "./navbar";
 import Chaticon from "./chatIcon";
 import { IonIcon } from "@ionic/react";
 import { helpCircleOutline, helpCircleSharp, playCircleOutline, readerOutline,checkmarkCircleOutline } from "ionicons/icons";
-const courseUrl = `https://kasifzisan.pythonanywhere.com/course/`;
-const quizattempUrl = "https://kasifzisan.pythonanywhere.com/course/2/module/10/quiz/3/quizAttempt/";
+const courseUrl = `http://127.0.0.1:8000/course/`;
+const quizattempUrl = "http://127.0.0.1:8000/course/2/module/10/quiz/3/quizAttempt/";
 
 function ContentShow() {
     const { course_id } = useParams();
@@ -29,8 +29,8 @@ function ContentShow() {
     const [quizTitle, setQuizTitle] = useState(null);
     const [quizModuleid, setQuizModuleId] = useState(null);
     const [quizid, setQuizid] = useState(null);
-    const Userurl = "https://kasifzisan.pythonanywhere.com/auth/users/me/";
-    const baseUrl = `https://kasifzisan.pythonanywhere.com/user/`;
+    const Userurl = "http://127.0.0.1:8000/auth/users/me/";
+    const baseUrl = `http://127.0.0.1:8000/user/`;
     const navigate = useNavigate();
     const Access = localStorage.accessToken;
     const isLoggedIn =!! userid;
@@ -218,12 +218,12 @@ function ContentShow() {
                                             <Link to="#" className=" text-sm" onClick={() => handleQuizClick(item.quiz_title,module.id,item.id)}>       
                                                 {item.quiz_title}
                                             </Link>
-                                            {/* {visitquiz && (
+                                            {visitquiz && (
                                                     <IonIcon
                                                         icon={checkmarkCircleOutline}
-                                                        className="text-green-500"
+                                                        className="text-green-600 text-md ml-1"
                                                     />
-                                                )} */}
+                                                )}
                                         </li>
                                     ))}
                                 </ul>
@@ -262,7 +262,7 @@ function ContentShow() {
                 </div>
                 <div>
                     {selectedQuiz && (
-                        <div className="pl-10 pt-20">
+                        <div className="pl-10 pr-10 pt-20">
                             <h1 className="text-4xl font-medium">{quizTitle}</h1>
                             
                             <div className="flex items-center justify-between mt-20 pt-6 pb-6 border-t-2 border-b-2">
