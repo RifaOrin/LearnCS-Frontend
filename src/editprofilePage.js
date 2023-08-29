@@ -92,7 +92,10 @@ function Editprofile() {
 
         formdata.append("first_name", first_name);
         formdata.append("last_name", last_name);
-        formdata.append("profile_picture", selectedProfilePicture);
+        if (selectedProfilePicture) {
+            formdata.append("profile_picture", selectedProfilePicture);
+        }
+        // formdata.append("profile_picture", selectedProfilePicture);
         formdata.append("email", email);
         formdata.append("university", university);
         formdata.append("location", location);
@@ -103,7 +106,7 @@ function Editprofile() {
             method: "put",
             url: baseUrl + id + "/",
             data: formdata,
-            headers: { "Content-Type": "multipart/form-data",'Authorization': `JWT ${Access}` },
+            headers: { "Content-Type": "multipart/form-data; boundary=${formdata._boundary}",'Authorization': `JWT ${Access}` },
         })
             .then((response) => {
                 console.log(response.data);
