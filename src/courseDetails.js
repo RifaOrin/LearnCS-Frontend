@@ -11,7 +11,7 @@ import {
     documentTextOutline,
     helpCircleOutline,
     lockClosedOutline,
-    lockClosed
+    lockClosed,
 } from "ionicons/icons";
 import Navbar from "./navbar";
 import Chaticon from "./chatIcon";
@@ -81,29 +81,25 @@ function CourseDetails() {
     const handleEnroll = () => {
         if (!isLoggedIn) {
             setShowLoginPopup(true);
-            
-        }
-        else{
-        const enrollmentData = {
-            course: course_id,
-            user: userid,
-        };
+        } else {
+            const enrollmentData = {
+                course: course_id,
+                user: userid,
+            };
 
-        axios
-            .post(enrollmenturl, enrollmentData)
-            .then((response) => {
-                // Handle successful enrollment
-                setIsEnrolled(true);
-                window.location.reload();
-            })
-            .catch((error) => {
-                // Handle enrollment error
-                console.error("Error enrolling:", error);
-            });
+            axios
+                .post(enrollmenturl, enrollmentData)
+                .then((response) => {
+                    // Handle successful enrollment
+                    setIsEnrolled(true);
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    // Handle enrollment error
+                    console.error("Error enrolling:", error);
+                });
         }
     };
-
-    
 
     useEffect(() => {
         if (Access != undefined) {
@@ -261,9 +257,7 @@ function CourseDetails() {
                     <h2 className="text-xl font-bold mb-2 text-center pb-5">
                         Login Required
                     </h2>
-                    <p className="mb-4 text-center">
-                        Please Login First
-                    </p>
+                    <p className="mb-4 text-center">Please Login First</p>
                     <button
                         className="bg-[#072746] text-white font-semibold px-4 py-2 rounded hover:bg-[#072746]"
                         onClick={closeLoginPopup}
@@ -286,13 +280,15 @@ function CourseDetails() {
                     {instructor.map((instructorDetails) => {
                         const { id, name } = instructorDetails;
                         return (
-                            <Link to = {`/instructor/${instructorDetails.id}/${course_id}`}>
-                            <p className="mt-3 text-sm">
-                                Created by{" "}
-                                <span className="underline text-[#7ED98B] cursor-pointer">
-                                    {name}{" "}
-                                </span>
-                            </p>
+                            <Link
+                                to={`/instructor/${instructorDetails.id}/${course_id}`}
+                            >
+                                <p className="mt-3 text-sm">
+                                    Created by{" "}
+                                    <span className="underline text-[#7ED98B] cursor-pointer">
+                                        {name}{" "}
+                                    </span>
+                                </p>
                             </Link>
                         );
                     })}
@@ -328,25 +324,26 @@ function CourseDetails() {
                 </div>
 
                 {!isEnrolled && (
-                    <div className=" max-w-sm p-10 ml-10 mt-10 mr-20 border border-gray-200 rounded-lg shadow-lg">
-                        {/* <h2 className="mb-2 pb-3 text-2xl font-bold tracking-tight text-gray-900">
-                            $33.08
-                        </h2> */}
+                    <div className="max-w-sm p-10 ml-10 mt-10 mr-20 border border-gray-200 rounded-lg shadow-lg">
                         <button
                             className="px-7 py-3 sm:px-3 sm:py-2 text-sm font-bold text-center text-white bg-[#4f975a] rounded-sm hover:bg-[#316439]"
-                            href=""
                             onClick={handleEnroll}
                         >
                             Enrollment
                         </button>
-                        <p className="text-xs font-medium text-gray-500 pt-5">
-                            Aren't member?
-                        </p>
-                        <Link to="/signup">
-                            <p className="text-xs font-semibold underline text-[#4f975a]">
-                                Join for free
+
+                        {isLoggedIn ? null : (
+                            <p className="text-xs font-medium text-gray-500 pt-5">
+                                Aren't a member?
                             </p>
-                        </Link>
+                        )}
+                        {!isLoggedIn && (
+                            <Link to="/signup">
+                                <p className="text-xs font-semibold underline text-[#4f975a]">
+                                    Join for free
+                                </p>
+                            </Link>
+                        )}
                     </div>
                 )}
             </div>
@@ -377,7 +374,7 @@ function CourseDetails() {
                 Course Content
             </h2>
             {showEnrollmentPopup && <EnrollmentPopup />}
-            {showLoginPopup && <LoginPopup/>}
+            {showLoginPopup && <LoginPopup />}
             {module.map((Modules) => {
                 const { id, name } = Modules;
                 const module_id = id;
@@ -404,14 +401,17 @@ function CourseDetails() {
                                     {/* Show videos */}
 
                                     <div className="inline-flex pl-3 pb-3 pt-3 space-x-2">
-                                    {isModuleEnrolled ? (
-                                        <IonIcon
-                                            icon={logoYoutube}
-                                            className="text-xl"
-                                        />) : (<IonIcon
-                                            icon={lockClosed}
-                                            className="text-xl"
-                                        />)}
+                                        {isModuleEnrolled ? (
+                                            <IonIcon
+                                                icon={logoYoutube}
+                                                className="text-xl"
+                                            />
+                                        ) : (
+                                            <IonIcon
+                                                icon={lockClosed}
+                                                className="text-xl"
+                                            />
+                                        )}
                                         {video.map((item) => (
                                             <p
                                                 className="text-sm text-gray-600"
@@ -439,14 +439,17 @@ function CourseDetails() {
                                     {/* Show PDFs */}
 
                                     <div className="inline-flex pl-3 pb-3 pt-3 space-x-2">
-                                    {isModuleEnrolled ? (
-                                        <IonIcon
-                                            icon={documentTextOutline}
-                                            className="text-xl"
-                                        />) : (<IonIcon
-                                            icon={lockClosed}
-                                            className="text-xl"
-                                        />)}
+                                        {isModuleEnrolled ? (
+                                            <IonIcon
+                                                icon={documentTextOutline}
+                                                className="text-xl"
+                                            />
+                                        ) : (
+                                            <IonIcon
+                                                icon={lockClosed}
+                                                className="text-xl"
+                                            />
+                                        )}
                                         {pdf.map((item) => (
                                             <p
                                                 className="text-sm text-gray-600"
@@ -474,14 +477,17 @@ function CourseDetails() {
                                     {/* Show quizzes */}
 
                                     <div className="inline-flex pl-3 pb-3 pt-3 space-x-2">
-                                    {isModuleEnrolled ? (
-                                        <IonIcon
-                                            icon={helpCircleOutline}
-                                            className="text-xl"
-                                        />) : (<IonIcon
-                                            icon={lockClosed}
-                                            className="text-xl"
-                                        />)}
+                                        {isModuleEnrolled ? (
+                                            <IonIcon
+                                                icon={helpCircleOutline}
+                                                className="text-xl"
+                                            />
+                                        ) : (
+                                            <IonIcon
+                                                icon={lockClosed}
+                                                className="text-xl"
+                                            />
+                                        )}
                                         {quiz.map((item) => (
                                             <p
                                                 className=" text-sm text-gray-600"
@@ -489,7 +495,7 @@ function CourseDetails() {
                                             >
                                                 {isModuleEnrolled ? (
                                                     <Link
-                                                    to={`/contentshow/${course_id}`}
+                                                        to={`/contentshow/${course_id}`}
                                                     >
                                                         {item.quiz_title}
                                                     </Link>
@@ -570,9 +576,7 @@ function CourseDetails() {
                     })}
                 </div>
             </div>
-            {isLoggedIn && (
-            <Chaticon/>
-            )}
+            {isLoggedIn && <Chaticon />}
             <Footer />
         </body>
     );
