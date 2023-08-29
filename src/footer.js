@@ -36,6 +36,8 @@ function Footer(){
                             
 
                         </div>
+                        <div className="border-b-2 border-green-500"></div>
+                        <p className="mt-4 text-sm text-gray-300 ">Copyright © 2023 LearnCS Team. All rights reserved. </p>
 
                     </div>
                 </div>
