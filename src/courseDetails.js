@@ -231,7 +231,7 @@ function CourseDetails() {
 
     const EnrollmentPopup = () => {
         return (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="fixed z-10 inset-0 flex items-center justify-center bg-black bg-opacity-50">
                 <div className="bg-white p-8 rounded-lg">
                     <h2 className="text-xl font-bold mb-2 text-center pb-5">
                         Enrollment Required
@@ -254,7 +254,7 @@ function CourseDetails() {
 
     const LoginPopup = () => {
         return (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="fixed z-10 inset-0 flex items-center justify-center bg-black bg-opacity-50">
                 <div className="bg-white p-8 rounded-lg">
                     <h2 className="text-xl font-bold mb-2 text-center pb-5">
                         Login Required
@@ -551,7 +551,7 @@ function CourseDetails() {
                                             src={photo}
                                         />
                                     </div>
-                                    <div className="pl-10 pt-20 flex flex-col">
+                                    <div className="pl-10 flex flex-col justify-center">
                                         <div className="inline-flex space-x-2">
                                             <IonIcon
                                                 icon={caretForwardCircleOutline}
