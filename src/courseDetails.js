@@ -236,15 +236,17 @@ function CourseDetails() {
                     <h2 className="text-xl font-bold mb-2 text-center pb-5">
                         Enrollment Required
                     </h2>
-                    <p className="mb-4 text-center">
+                    <p className="mb-4 text-center text-lg font-medium text-red-600">
                         Please enroll in the course to access the content.
                     </p>
+                    <div className="flex justify-center">
                     <button
-                        className="bg-[#072746] text-white font-semibold px-4 py-2 rounded hover:bg-[#072746]"
+                        className="bg-[#072746] text-white font-semibold px-4 py-2 rounded hover:bg-[#0a4988]"
                         onClick={closeEnrollmentPopup}
                     >
                         Close
                     </button>
+                    </div>
                 </div>
             </div>
         );
@@ -257,13 +259,15 @@ function CourseDetails() {
                     <h2 className="text-xl font-bold mb-2 text-center pb-5">
                         Login Required
                     </h2>
-                    <p className="mb-4 text-center">Please Login First</p>
+                    <p className="mb-4 text-center text-base text-red-600 font-medium">Please Login First</p>
+                    <div className="flex justify-center"> 
                     <button
-                        className="bg-[#072746] text-white font-semibold px-4 py-2 rounded hover:bg-[#072746]"
+                        className="bg-[#072746] text-white font-semibold px-4 py-2 rounded hover:bg-[#0a4988]"
                         onClick={closeLoginPopup}
                     >
                         Close
                     </button>
+                    </div>
                 </div>
             </div>
         );
@@ -272,8 +276,8 @@ function CourseDetails() {
     return (
         <body id="courseDetailsStart">
             <Navbar />
-            <div className="w-full flex flex-row bg-[#012326] pb-5">
-                <div className="pl-40 w-3/4 pt-20 pr-10 text-white">
+            <div className="w-full flex flex-col md:flex-row bg-[#00242C] pb-5">
+                <div className="pl-20 w-5/6 md:pl-40 md:w-3/4 pt-14 pr-10 text-white">
                     <h1 className="text-4xl font-bold mb-5">{title}</h1>
                     <p className="text-justify">{description}</p>
                     <p className="mt-2">Category: {category}</p>
@@ -293,7 +297,7 @@ function CourseDetails() {
                         );
                     })}
                 </div>
-                <div className="pr-40 w-2/4 pt-20">
+                <div className="hidden md:inline-block pr-40 w-2/4 pt-20">
                     <img
                         className="border rounded-xl"
                         src={cover_photo}
@@ -326,10 +330,10 @@ function CourseDetails() {
                 {!isEnrolled && (
                     <div className="max-w-sm p-10 ml-10 mt-10 mr-20 border border-gray-200 rounded-lg shadow-lg">
                         <button
-                            className="px-7 py-3 sm:px-3 sm:py-2 text-sm font-bold text-center text-white bg-[#4f975a] rounded-sm hover:bg-[#316439]"
+                            className="px-8 py-4 sm:px-3 sm:py-2 text-sm font-bold text-center text-white bg-[#4f975a] rounded-sm hover:bg-[#316439]"
                             onClick={handleEnroll}
                         >
-                            Enrollment
+                            Enroll Now
                         </button>
 
                         {isLoggedIn ? null : (
@@ -339,7 +343,7 @@ function CourseDetails() {
                         )}
                         {!isLoggedIn && (
                             <Link to="/signup">
-                                <p className="text-xs font-semibold underline text-[#4f975a]">
+                                <p className="text-xs text-center font-semibold underline text-[#4f975a]">
                                     Join for free
                                 </p>
                             </Link>
