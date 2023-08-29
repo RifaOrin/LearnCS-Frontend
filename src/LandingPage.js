@@ -14,8 +14,8 @@ import { useEffect } from "react";
 
 import { IonIcon } from "@ionic/react";
 import { chatbubbles, logOut } from "ionicons/icons";
-const Userurl = "http://127.0.0.1:8000/auth/users/me/";
-const baseUrl = `http://127.0.0.1:8000/user/`;
+const Userurl = "https://kasifzisan.pythonanywhere.com/auth/users/me/";
+const baseUrl = `https://kasifzisan.pythonanywhere.com/user/`;
 
 function LandingPage() {
     const navigate = useNavigate();

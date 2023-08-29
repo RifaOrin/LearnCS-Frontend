@@ -16,8 +16,8 @@ import {
 import Navbar from "./navbar";
 import Chaticon from "./chatIcon";
 import Footer from "./footer";
-const baseUrl = `http://127.0.0.1:8000/course/`;
-const Userurl = "http://127.0.0.1:8000/auth/users/me/";
+const baseUrl = `https://kasifzisan.pythonanywhere.com/course/`;
+const Userurl = "https://kasifzisan.pythonanywhere.com/auth/users/me/";
 
 function CourseDetails() {
     const navigate = useNavigate();
@@ -48,9 +48,9 @@ function CourseDetails() {
     const [expandedModuleId, setExpandedModuleId] = useState(null);
     const Access = localStorage.accessToken;
     const instrrctorCourselink =
-        "http://127.0.0.1:8000/course/teacher/" + instructorId + "/teachings/";
+        "https://kasifzisan.pythonanywhere.com/course/teacher/" + instructorId + "/teachings/";
     const enrollmenturl =
-        "http://127.0.0.1:8000/course/" + course_id + "/enrollment/";
+        "https://kasifzisan.pythonanywhere.com/course/" + course_id + "/enrollment/";
 
     const handleEnrollmentPopup = () => {
         setShowEnrollmentPopup(true);

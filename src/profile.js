@@ -8,8 +8,8 @@ import axios from "axios";
 import Navbar from "./navbar";
 import Chaticon from "./chatIcon";
 
-const Userurl = "http://127.0.0.1:8000/auth/users/me/";
-const baseUrl = `http://127.0.0.1:8000/user/`;
+const Userurl = "https://kasifzisan.pythonanywhere.com/auth/users/me/";
+const baseUrl = `https://kasifzisan.pythonanywhere.com/user/`;
 function Profile() {
     //const { id } = useParams();
     const navigate = useNavigate();

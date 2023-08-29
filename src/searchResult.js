@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "./navbar";
 
-const url = "http://127.0.0.1:8000/course/";
+const url = "https://kasifzisan.pythonanywhere.com/course/";
 
 function SearchResult() {
     const { searchValue } = useParams();

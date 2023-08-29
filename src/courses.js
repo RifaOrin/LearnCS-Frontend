@@ -6,7 +6,7 @@ import Navbar from "./navbar";
 //import isLoggedIn from "./LandingPage";
 
 function Courses() {
-    const url = "http://127.0.0.1:8000/course/";
+    const url = "https://kasifzisan.pythonanywhere.com/course/";
     const [courses, setCourses] = useState([]);
     const [error, setError] = useState("");
     const [selectedCategory, setSelectedCategory] = useState(null);

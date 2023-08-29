@@ -9,8 +9,8 @@ import Navbar from "./navbar";
 import Chaticon from "./chatIcon";
 import { IonIcon } from "@ionic/react";
 import { helpCircleOutline, helpCircleSharp, playCircleOutline, readerOutline,checkmarkCircleOutline } from "ionicons/icons";
-const courseUrl = `http://127.0.0.1:8000/course/`;
-const quizattempUrl = "http://127.0.0.1:8000/course/2/module/10/quiz/3/quizAttempt/";
+const courseUrl = `https://kasifzisan.pythonanywhere.com/course/`;
+const quizattempUrl = "https://kasifzisan.pythonanywhere.com/course/2/module/10/quiz/3/quizAttempt/";
 
 function ContentShow() {
     const { course_id } = useParams();
@@ -29,8 +29,8 @@ function ContentShow() {
     const [quizTitle, setQuizTitle] = useState(null);
     const [quizModuleid, setQuizModuleId] = useState(null);
     const [quizid, setQuizid] = useState(null);
-    const Userurl = "http://127.0.0.1:8000/auth/users/me/";
-    const baseUrl = `http://127.0.0.1:8000/user/`;
+    const Userurl = "https://kasifzisan.pythonanywhere.com/auth/users/me/";
+    const baseUrl = `https://kasifzisan.pythonanywhere.com/user/`;
     const navigate = useNavigate();
     const Access = localStorage.accessToken;
     const isLoggedIn =!! userid;

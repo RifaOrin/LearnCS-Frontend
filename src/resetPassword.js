@@ -2,7 +2,7 @@ import { useState } from "react";
 import Background from "./images/background.jpg";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-const Url = "http://127.0.0.1:8000/auth/users/reset_password/";
+const Url = "https://kasifzisan.pythonanywhere.com/auth/users/reset_password/";
 function ResetPass() {
     const [email, setEmail] = useState("");
     const navigate = useNavigate();

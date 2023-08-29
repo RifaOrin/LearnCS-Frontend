@@ -10,12 +10,12 @@ function Quizquestion() {
     const [correctCount, setCorrectCount] = useState(0); // Initialize count to 0
     const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate();
-    const Userurl = "http://127.0.0.1:8000/auth/users/me/";
+    const Userurl = "https://kasifzisan.pythonanywhere.com/auth/users/me/";
     const Access = localStorage.accessToken;
     
 
     const baseUrl =
-        "http://127.0.0.1:8000/course/" +
+        "https://kasifzisan.pythonanywhere.com/course/" +
         course_id +
         "/module/" +
         module_id +
@@ -23,7 +23,7 @@ function Quizquestion() {
         quiz_id +
         "/question/";
     const quizAttemptUrl =
-        "http://127.0.0.1:8000/course/" +
+        "https://kasifzisan.pythonanywhere.com/course/" +
         course_id +
         "/module/" +
         module_id +

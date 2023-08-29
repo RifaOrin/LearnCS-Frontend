@@ -20,9 +20,9 @@ function Instructor() {
     const navigate = useNavigate();
     const Access = localStorage.accessToken;
     const isLoggedIn =!! userid;
-    const Userurl = "http://127.0.0.1:8000/auth/users/me/";
-    const instrrctorlink = "http://127.0.0.1:8000/course/"+course_id+"/instructor/"
-    const instrrctorCourselink = "http://127.0.0.1:8000/course/teacher/"+instructor_id+"/teachings/"
+    const Userurl = "https://kasifzisan.pythonanywhere.com/auth/users/me/";
+    const instrrctorlink = "https://kasifzisan.pythonanywhere.com/course/"+course_id+"/instructor/"
+    const instrrctorCourselink = "https://kasifzisan.pythonanywhere.com/course/teacher/"+instructor_id+"/teachings/"
 
 
     useEffect(() => {
