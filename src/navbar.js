@@ -83,39 +83,43 @@ function Navbar(){
     }, [Access, navigate])
 
     return(
-        <nav className="bg-[#012326] p-4 flex items-center justify-between">
+        <nav className="bg-[#00242C] p-4 flex items-center justify-between">
             <div className="flex items-center">
             <Link to = "/">
             <img src={Logo} className="w-40 cursor-pointer"></img>
             </Link>
             </div>
             <div className="flex-grow md:flex md:items-center md:w-1/2">
-            <div className="relative md:pl-10 w-64 md:w-auto">
-    <div className="absolute right-2 md:left-12 top-1/2 transform -translate-y-1/2">
-        <Link to={`/searchResult/${searchValue}`}>
-            <svg
-                className="w-5 h-5 text-white cursor-pointer"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-4.35-4.35"></path>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 18a8 8 0 100-16 8 8 0 000 16z"></path>
-            </svg>
-        </Link>
-    </div>
-    <input
-        type="text"
-        placeholder="Search for courses"
-        id="search"
-        className="hidden md:inline-block bg-[#012326] placeholder-white text-white border-2 outline-none rounded-sm py-2 px-4 w-full  pl-10"
-        value={searchValue}
-        onChange={handleChange}
-    />
-</div>
-
-
+                <div className="relative flex items-center">
+                <Link to={`/searchResult/${searchValue}`}>
+                    <div className="grid place-items-center absolute right-2 md:left-12 top-1/2 transform -translate-y-1/2 h-full w-12 text-gray-300">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-6 w-6"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            />
+                        </svg>
+                    </div>
+                </Link>
+                <input
+                type="text"
+                placeholder="Search for courses"
+                id="search"
+                className="hidden md:inline-block bg-[#012326] placeholder-white text-white border-2 outline-none rounded-sm py-2 px-4 ml-10 pl-14"
+                value={searchValue}
+                onChange={handleChange}
+                />
+                </div>
+            
+           
             </div>
             <div className="md:flex md:items-center">
                 <Link to = "/courses" className="hidden lg:block text-white text-md font-semibold mr-4 hover:text-[#05F26C]">Explore Courses</Link>

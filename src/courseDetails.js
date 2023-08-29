@@ -272,8 +272,8 @@ function CourseDetails() {
     return (
         <body id="courseDetailsStart">
             <Navbar />
-            <div className="w-full flex flex-row bg-[#012326] pb-5">
-                <div className="pl-40 w-3/4 pt-20 pr-10 text-white">
+            <div className="w-full flex flex-col md:flex-row bg-[#00242C] pb-5">
+                <div className="pl-20 w-5/6 md:pl-40 md:w-3/4 pt-14 pr-10 text-white">
                     <h1 className="text-4xl font-bold mb-5">{title}</h1>
                     <p className="text-justify">{description}</p>
                     <p className="mt-2">Category: {category}</p>
@@ -293,7 +293,7 @@ function CourseDetails() {
                         );
                     })}
                 </div>
-                <div className="pr-40 w-2/4 pt-20">
+                <div className="hidden md:inline-block pr-40 w-2/4 pt-20">
                     <img
                         className="border rounded-xl"
                         src={cover_photo}
