@@ -239,7 +239,7 @@ function ContentShow() {
                 
                 <div>
                     {selectedPdf && (
-                        <div className="h-1/3 w-11/12  ml-14 border rounded-lg shadow p-4 mb-4" style={{ height: "85vh" }}>
+                        <div className="h-1/3 w-11/12 border rounded-lg shadow p-4 mb-4" style={{ height: "85vh" }}>
                             <Worker workerUrl="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js">
                                 <Viewer fileUrl={selectedPdf} plugins={[newplugin]} />
                             </Worker>
