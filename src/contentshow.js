@@ -168,7 +168,7 @@ function ContentShow() {
         <body className="min-h-screen">
             <Navbar />
         <div className=" flex flex-row" >
-            <div className="h-screen flex flex-col pt-14 pl-14 mr-4 w-1/5 overflow-y-auto border-y shadow-lg pr-5" style={{ height: "85vh" }}>
+            <div className="h-screen flex flex-col pt-14 pl-14 mr-4 w-1/4 overflow-y-auto border-y shadow-lg " style={{ height: "85vh" }}>
                 {modules.map((module) => (
                     <div key={module.id} className="mb-3">
                         <Link to="#" className="text-base font-semibold text-start" onClick={() => toggleModuleDropdown(module.id)}>
@@ -219,11 +219,11 @@ function ContentShow() {
                                                 {item.quiz_title}
                                             </Link>
                                             {/* {visitquiz && (
-                <IonIcon
-                    icon={checkmarkCircleOutline}
-                    className="text-green-500"
-                />
-            )} */}
+                                                    <IonIcon
+                                                        icon={checkmarkCircleOutline}
+                                                        className="text-green-500"
+                                                    />
+                                                )} */}
                                         </li>
                                     ))}
                                 </ul>
