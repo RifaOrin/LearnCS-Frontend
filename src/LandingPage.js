@@ -87,7 +87,7 @@ function LandingPage() {
     }, [Access, navigate])
     return (
         <body>
-            <div className=" h-21  bg-[#00242cc9] pl-16 pr-10 py-0.25 absolute z-20">
+            <div className="w-full h-21  bg-[#00242cc9] pl-16 pr-10 py-0.25 absolute z-20">
                 <nav className=" flex items-center justify-between">
                     
                     <img src={Logo} className="w-1/6 h-21 cursor-pointer"></img>
