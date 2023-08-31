@@ -103,7 +103,7 @@ function LandingPage() {
                         </li>
                         <li className="list-none inline-block px-5">
                             <Link
-                                to=""
+                                to="/aboutUs"
                                 className="no-underline text-[#F2F2F2] text-lg font-semibold px-3 py-3 hover:border-2 hover:scale-105 duration-250 cursor-pointer"
                             >
                                 About Us

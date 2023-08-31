@@ -338,7 +338,7 @@ function CourseDetails() {
                         {isLoggedIn ? ( // Check if user is logged in
                             <div className="flex justify-center items-center h-full">
                                 <button
-                                    className="w-full px-6 py-3 mt-20 ml-20 text-sm font-semibold text-white bg-[#4f975a] hover:bg-[#316439] rounded-md"
+                                    className="w-full px-6 py-3 mt-10 ml-20 text-sm font-semibold text-white bg-[#4f975a] hover:bg-[#316439] rounded-md"
                                     onClick={handleEnroll}
                                 >
                                     Enroll Now
