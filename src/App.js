@@ -16,7 +16,8 @@ import Quizquestion from "./quizquestion";
 import ContentShow from "./contentshow";
 import Chat from "./chat";
 import Chaticon from "./chatIcon";
-import ResetPassConfirm from "./resetPassConfirmation"
+import ResetPassConfirm from "./resetPassConfirmation";
+import About from "./aboutUs";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -75,6 +76,7 @@ function App() {
 
                     <Route path="/chatIcon" element={<Chaticon />}></Route>
                     <Route path="/resetPassConfirmation" element={<ResetPassConfirm />}></Route>
+                    <Route path="/aboutUs" element={<About />}></Route>
                 </Routes>
             </div>
         </Router>
