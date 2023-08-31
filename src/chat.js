@@ -16,9 +16,9 @@ function Chat() {
     const [myUsername, setUsername] = useState("");
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
+    const chatContainerRef = useRef();
     const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp();
     const Access = localStorage.accessToken;
-    
 
     useEffect(() => {
         axios
@@ -52,7 +52,6 @@ function Chat() {
                     navigate("/login");
                 }
             });
-            
     }, [Access, navigate]);
 
     useEffect(() => {
@@ -62,7 +61,6 @@ function Chat() {
             .onSnapshot((snapshot) => {
                 setMessages(snapshot.docs.map((doc) => doc.data()));
             });
-            
     }, []);
 
     async function handleMessage(e) {
@@ -71,23 +69,20 @@ function Chat() {
             text: message,
             createdAt: serverTimestamp,
             username: myUsername,
+            userId: userid,
         });
         setMessage("");
+
+        chatContainerRef.current.scrollIntoView({ behavior: "smooth" });
     }
 
     return (
         <body className="min-h-screen bg-gradient-to-b from-gray-400 to-gray-950">
             <Navbar />
             <div className="m-3 h-[83vh] max-w-lg mx-auto rounded-lg p-5 shadow-md flex flex-col bg-gradient-to-b from-gray-800 to-gray-950">
-                <div
-                    
-                    className=" overflow-y-auto scrollbar-thin scrollbar-thumb-[#433491] scrollbar-track-gray-400 grow px-4"
-                >
+                <div className=" overflow-y-auto scrollbar-thin scrollbar-thumb-[#433491] scrollbar-track-gray-400 grow px-4">
                     {messages.map(({ id, text, username }) => (
-                        <div
-                        key={id}
-                        className="flex flex-col"
-                    >
+                        <div key={id} className="flex flex-col">
                             <span
                                 className={`text-sm text-[#888] mb-2 ${
                                     username === myUsername
@@ -109,6 +104,7 @@ function Chat() {
                             </div>
                         </div>
                     ))}
+                    <div ref={chatContainerRef}></div>
                 </div>
 
                 <form

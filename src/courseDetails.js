@@ -48,9 +48,13 @@ function CourseDetails() {
     const [expandedModuleId, setExpandedModuleId] = useState(null);
     const Access = localStorage.accessToken;
     const instrrctorCourselink =
-        "https://kasifzisan.pythonanywhere.com/course/teacher/" + instructorId + "/teachings/";
+        "https://kasifzisan.pythonanywhere.com/course/teacher/" +
+        instructorId +
+        "/teachings/";
     const enrollmenturl =
-        "https://kasifzisan.pythonanywhere.com/course/" + course_id + "/enrollment/";
+        "https://kasifzisan.pythonanywhere.com/course/" +
+        course_id +
+        "/enrollment/";
 
     const handleEnrollmentPopup = () => {
         setShowEnrollmentPopup(true);
@@ -240,12 +244,12 @@ function CourseDetails() {
                         Please enroll in the course to access the content.
                     </p>
                     <div className="flex justify-center">
-                    <button
-                        className="bg-[#072746] text-white font-semibold px-4 py-2 rounded hover:bg-[#0a4988]"
-                        onClick={closeEnrollmentPopup}
-                    >
-                        Close
-                    </button>
+                        <button
+                            className="bg-[#072746] text-white font-semibold px-4 py-2 rounded hover:bg-[#0a4988]"
+                            onClick={closeEnrollmentPopup}
+                        >
+                            Close
+                        </button>
                     </div>
                 </div>
             </div>
@@ -259,14 +263,16 @@ function CourseDetails() {
                     <h2 className="text-xl font-bold mb-2 text-center pb-5">
                         Login Required
                     </h2>
-                    <p className="mb-4 text-center text-base text-red-600 font-medium">Please Login First</p>
-                    <div className="flex justify-center"> 
-                    <button
-                        className="bg-[#072746] text-white font-semibold px-4 py-2 rounded hover:bg-[#0a4988]"
-                        onClick={closeLoginPopup}
-                    >
-                        Close
-                    </button>
+                    <p className="mb-4 text-center text-base text-red-600 font-medium">
+                        Please Login First
+                    </p>
+                    <div className="flex justify-center">
+                        <button
+                            className="bg-[#072746] text-white font-semibold px-4 py-2 rounded hover:bg-[#0a4988]"
+                            onClick={closeLoginPopup}
+                        >
+                            Close
+                        </button>
                     </div>
                 </div>
             </div>
@@ -328,27 +334,35 @@ function CourseDetails() {
                 </div>
 
                 {!isEnrolled && (
-                    <div className="max-w-sm p-10 ml-10 mt-10 mr-20 border border-gray-200 rounded-lg shadow-lg">
-                        <button
-                            className="px-8 py-4 sm:px-3 sm:py-2 text-sm font-bold text-center text-white bg-[#4f975a] rounded-sm hover:bg-[#316439]"
-                            onClick={handleEnroll}
-                        >
-                            Enroll Now
-                        </button>
-
-                        {isLoggedIn ? null : (
-                            <p className="text-xs font-medium text-gray-500 pt-5">
-                                Aren't a member?
-                            </p>
-                        )}
-                        {!isLoggedIn && (
-                            <Link to="/signup">
-                                <p className="text-xs text-center font-semibold underline text-[#4f975a]">
-                                    Join for free
+                    <>
+                        {isLoggedIn ? ( // Check if user is logged in
+                            <div className="flex justify-center items-center h-full">
+                                <button
+                                    className="w-full px-6 py-3 mt-20 ml-20 text-sm font-semibold text-white bg-[#4f975a] hover:bg-[#316439] rounded-md"
+                                    onClick={handleEnroll}
+                                >
+                                    Enroll Now
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="max-w-sm p-10 ml-10 mt-10 mr-20 border border-gray-200 rounded-lg shadow-lg">
+                                <button
+                                    className="px-8 py-4 sm:px-3 sm:py-2 text-sm font-bold text-center text-white bg-[#4f975a] rounded-sm hover:bg-[#316439]"
+                                    onClick={handleEnroll}
+                                >
+                                    Enroll Now
+                                </button>
+                                <p className="text-xs font-medium text-gray-500 pt-5">
+                                    Aren't a member?
                                 </p>
-                            </Link>
+                                <Link to="/signup">
+                                    <p className="text-xs text-center font-semibold underline text-[#4f975a]">
+                                        Join for free
+                                    </p>
+                                </Link>
+                            </div>
                         )}
-                    </div>
+                    </>
                 )}
             </div>
 
@@ -403,119 +417,123 @@ function CourseDetails() {
                             {expandedModuleId === id && (
                                 <div className="flex flex-col">
                                     {/* Show videos */}
+                                    {video.length > 0 && (
+                                        <div className="inline-flex pl-3 pb-3 pt-3 space-x-2">
+                                            {isModuleEnrolled ? (
+                                                <IonIcon
+                                                    icon={logoYoutube}
+                                                    className="text-xl"
+                                                />
+                                            ) : (
+                                                <IonIcon
+                                                    icon={lockClosed}
+                                                    className="text-xl"
+                                                />
+                                            )}
 
-                                    <div className="inline-flex pl-3 pb-3 pt-3 space-x-2">
-                                        {isModuleEnrolled ? (
-                                            <IonIcon
-                                                icon={logoYoutube}
-                                                className="text-xl"
-                                            />
-                                        ) : (
-                                            <IonIcon
-                                                icon={lockClosed}
-                                                className="text-xl"
-                                            />
-                                        )}
-                                        {video.map((item) => (
-                                            <p
-                                                className="text-sm text-gray-600"
-                                                key={item.id}
-                                            >
-                                                {isModuleEnrolled ? (
-                                                    <Link
-                                                        to={`/contentshow/${course_id}`}
-                                                    >
-                                                        {item.title}
-                                                    </Link>
-                                                ) : (
-                                                    <span
-                                                        className="cursor-pointer"
-                                                        onClick={
-                                                            handleEnrollmentPopup
-                                                        }
-                                                    >
-                                                        {item.title}
-                                                    </span>
-                                                )}
-                                            </p>
-                                        ))}
-                                    </div>
+                                            {video.map((item) => (
+                                                <p
+                                                    className="text-sm text-gray-600"
+                                                    key={item.id}
+                                                >
+                                                    {isModuleEnrolled ? (
+                                                        <Link
+                                                            to={`/contentshow/${course_id}`}
+                                                        >
+                                                            {item.title}
+                                                        </Link>
+                                                    ) : (
+                                                        <span
+                                                            className="cursor-pointer"
+                                                            onClick={
+                                                                handleEnrollmentPopup
+                                                            }
+                                                        >
+                                                            {item.title}
+                                                        </span>
+                                                    )}
+                                                </p>
+                                            ))}
+                                        </div>
+                                    )}
                                     {/* Show PDFs */}
-
-                                    <div className="inline-flex pl-3 pb-3 pt-3 space-x-2">
-                                        {isModuleEnrolled ? (
-                                            <IonIcon
-                                                icon={documentTextOutline}
-                                                className="text-xl"
-                                            />
-                                        ) : (
-                                            <IonIcon
-                                                icon={lockClosed}
-                                                className="text-xl"
-                                            />
-                                        )}
-                                        {pdf.map((item) => (
-                                            <p
-                                                className="text-sm text-gray-600"
-                                                key={item.id}
-                                            >
-                                                {isModuleEnrolled ? (
-                                                    <Link
-                                                        to={`/contentshow/${course_id}`}
-                                                    >
-                                                        {item.title}
-                                                    </Link>
-                                                ) : (
-                                                    <span
-                                                        className="cursor-pointer"
-                                                        onClick={
-                                                            handleEnrollmentPopup
-                                                        }
-                                                    >
-                                                        {item.title}
-                                                    </span>
-                                                )}
-                                            </p>
-                                        ))}
-                                    </div>
+                                    {pdf.length > 0 && (
+                                        <div className="inline-flex pl-3 pb-3 pt-3 space-x-2">
+                                            {isModuleEnrolled ? (
+                                                <IonIcon
+                                                    icon={documentTextOutline}
+                                                    className="text-xl"
+                                                />
+                                            ) : (
+                                                <IonIcon
+                                                    icon={lockClosed}
+                                                    className="text-xl"
+                                                />
+                                            )}
+                                            {pdf.map((item) => (
+                                                <p
+                                                    className="text-sm text-gray-600"
+                                                    key={item.id}
+                                                >
+                                                    {isModuleEnrolled ? (
+                                                        <Link
+                                                            to={`/contentshow/${course_id}`}
+                                                        >
+                                                            {item.title}
+                                                        </Link>
+                                                    ) : (
+                                                        <span
+                                                            className="cursor-pointer"
+                                                            onClick={
+                                                                handleEnrollmentPopup
+                                                            }
+                                                        >
+                                                            {item.title}
+                                                        </span>
+                                                    )}
+                                                </p>
+                                            ))}
+                                        </div>
+                                    )}
                                     {/* Show quizzes */}
-
-                                    <div className="inline-flex pl-3 pb-3 pt-3 space-x-2">
-                                        {isModuleEnrolled ? (
-                                            <IonIcon
-                                                icon={helpCircleOutline}
-                                                className="text-xl"
-                                            />
-                                        ) : (
-                                            <IonIcon
-                                                icon={lockClosed}
-                                                className="text-xl"
-                                            />
-                                        )}
-                                        {quiz.map((item) => (
-                                            <p
-                                                className=" text-sm text-gray-600"
-                                                key={item.id}
-                                            >
-                                                {isModuleEnrolled ? (
-                                                    <Link
-                                                        to={`/contentshow/${course_id}`}
-                                                    >
-                                                        {item.quiz_title}
-                                                    </Link>
-                                                ) : (
-                                                    <span
-                                                        className="cursor-pointer"
-                                                        onClick={
-                                                            handleEnrollmentPopup
-                                                        }
-                                                    >
-                                                        {item.quiz_title}
-                                                    </span>
-                                                )}
-                                            </p>
-                                        ))}
-                                    </div>
+                                    {quiz.length > 0 && (
+                                        <div className="inline-flex pl-3 pb-3 pt-3 space-x-2">
+                                            {isModuleEnrolled ? (
+                                                <IonIcon
+                                                    icon={helpCircleOutline}
+                                                    className="text-xl"
+                                                />
+                                            ) : (
+                                                <IonIcon
+                                                    icon={lockClosed}
+                                                    className="text-xl"
+                                                />
+                                            )}
+                                            {quiz.map((item) => (
+                                                <p
+                                                    className=" text-sm text-gray-600"
+                                                    key={item.id}
+                                                >
+                                                    {isModuleEnrolled ? (
+                                                        <Link
+                                                            to={`/contentshow/${course_id}`}
+                                                        >
+                                                            {item.quiz_title}
+                                                        </Link>
+                                                    ) : (
+                                                        <span
+                                                            className="cursor-pointer"
+                                                            onClick={
+                                                                handleEnrollmentPopup
+                                                            }
+                                                        >
+                                                            {item.quiz_title}
+                                                        </span>
+                                                    )}
+                                                </p>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             )}
                         </div>
