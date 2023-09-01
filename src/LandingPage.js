@@ -146,11 +146,13 @@ function LandingPage() {
                     <Searchbar/>
                     {profile_picture ? (
                 <Link to="/profile">
+                    <div className="w-10 h-10 overflow-hidden rounded-full ml-4 mr-4">
                     <img
                         src={profile_picture}
                         alt="Profile"
-                        className="w-10 h-10 rounded-full cursor-pointer ml-4 mr-4"
+                        className="w-full h-full object-cover cursor-pointer "
                     />
+                    </div>
                 </Link>
             ) : (
                 isLoggedIn && (

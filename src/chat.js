@@ -79,8 +79,13 @@ function Chat() {
     return (
         <body className="min-h-screen bg-gradient-to-b from-gray-400 to-gray-950">
             <Navbar />
-            <div className="m-3 h-[83vh] max-w-lg mx-auto rounded-lg p-5 shadow-md flex flex-col bg-gradient-to-b from-gray-800 to-gray-950">
-                <div className=" overflow-y-auto scrollbar-thin scrollbar-thumb-[#433491] scrollbar-track-gray-400 grow px-4">
+
+            <div className="mt-2 h-[83vh] max-w-lg mx-auto rounded-lg p-5 shadow-md flex flex-col bg-gradient-to-b from-gray-800 to-gray-950">
+                <div
+                    
+                    className=" overflow-y-auto scrollbar-thin scrollbar-thumb-[#433491] scrollbar-track-gray-400 grow px-4"
+                >
+
                     {messages.map(({ id, text, username }) => (
                         <div key={id} className="flex flex-col">
                             <span
@@ -116,9 +121,9 @@ function Chat() {
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Type your message..."
-                        className="mt-2 flex-grow border bg-transparent rounded-full text-gray-200 py-3 px-4 font-medium focus:outline-none"
+                        className="mt-4 flex-grow border bg-transparent rounded-full text-gray-200 py-3 px-4 font-medium focus:outline-none"
                     />
-                    <button type="submit" className="ml-3 mt-2">
+                    <button type="submit" className="ml-3 mt-4">
                         <IonIcon
                             icon={send}
                             className="text-3xl text-[#433491] hover:text-[#2e2070]"

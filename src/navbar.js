@@ -92,7 +92,7 @@ function Navbar(){
             <div className="flex-grow md:flex md:items-center md:w-1/2">
                 <div className="relative flex items-center">
                 <Link to={`/searchResult/${searchValue}`}>
-                    <div className="grid place-items-center absolute right-2 md:left-12 top-1/2 transform -translate-y-1/2 h-full w-12 text-gray-300">
+                    <div className="grid place-items-center absolute right-1 bottom-4 md:left-12 md:top-1/2 transform -translate-y-1/2 h-full w-12 text-gray-300">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
