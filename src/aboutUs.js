@@ -34,8 +34,8 @@ function About(){
                 <div class="relative w-full max-w-lg">
                         <div class="absolute top-0 -left-4 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
                         <div class="absolute top-0 -right-4 w-80 h-80 bg-green-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-                        <div class="absolute -bottom-8 left-20 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-                        <div class="absolute -bottom-8 -right-20 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-5000"></div>
+                        <div class="absolute -bottom-8 left-20 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-3000"></div>
+                        <div class="absolute -bottom-8 -right-20 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-3000"></div>
                     <div className="relative">
                         <h1 className="text-5xl mb-5 font-medium w-full leading-normal text-black">Empower Your Future with LearnCS</h1>
                         <p className="text-xl text-gray-500 font-medium">Elevate Your Programming Journey with Comprehensive CS Courses on LearnCs</p>
