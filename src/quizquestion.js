@@ -12,7 +12,6 @@ function Quizquestion() {
     const navigate = useNavigate();
     const Userurl = "https://kasifzisan.pythonanywhere.com/auth/users/me/";
     const Access = localStorage.accessToken;
-    
 
     const baseUrl =
         "https://kasifzisan.pythonanywhere.com/course/" +
@@ -39,15 +38,13 @@ function Quizquestion() {
                 },
             })
             .then((response) => {
-                setUserid(response.data.id)
-            
+                setUserid(response.data.id);
             })
             .catch((error) => {
                 if (error.message === "Request failed with status code 401") {
                     navigate("/login");
                 }
             });
-            
     }, [Access, navigate]);
     useEffect(() => {
         axios.get(baseUrl).then((response) => {
@@ -93,7 +90,9 @@ function Quizquestion() {
     return (
         <div className="bg-gray-100 min-h-screen py-8">
             <div className="max-w-xl mx-auto p-4 bg-white shadow-md rounded-lg">
-                <h1 className="text-2xl font-semibold mb-5 mt-2 ml-2">Quiz Questions</h1>
+                <h1 className="text-2xl font-semibold mb-5 mt-2 ml-2">
+                    Quiz Questions
+                </h1>
                 <ul>
                     {quiz.map((question, index) => (
                         <li key={question.id} className="mb-6">
@@ -185,18 +184,18 @@ function Quizquestion() {
                     ))}
                 </ul>
                 <div className="flex flex-col items-end">
-                <button
-                    className="mt-4 bg-[#13974c] text-white font-semibold px-4 py-2 rounded hover:bg-[#0dc55d]"
-                    onClick={saveQuizAttempt}
-                >
-                    Submit Answers
-                </button>
-                <button
-                    className="block mt-4 text-[#13974c] hover:underline"
-                    onClick={() => navigate(-1)}
-                >
-                    Go back
-                </button>
+                    <button
+                        className="mt-4 bg-[#13974c] text-white font-semibold px-4 py-2 rounded hover:bg-[#0dc55d]"
+                        onClick={saveQuizAttempt}
+                    >
+                        Submit Answers
+                    </button>
+                    <button
+                        className="block mt-4 text-[#13974c] hover:underline"
+                        onClick={() => navigate(-1)}
+                    >
+                        Go back
+                    </button>
                 </div>
             </div>
             {showPopup && (
@@ -205,7 +204,9 @@ function Quizquestion() {
                         <h2 className="text-xl font-bold mb-2 text-center pb-5">
                             Quiz Results
                         </h2>
-                        <p className="mb-2 font-semibold text-lg">Your Answers:</p>
+                        <p className="mb-2 font-semibold text-lg">
+                            Your Answers:
+                        </p>
                         <ul className="mb-4">
                             {quiz.map((question, index) => (
                                 <li key={question.id}>
@@ -230,15 +231,19 @@ function Quizquestion() {
                                 </li>
                             ))}
                         </ul>
-                        
+
                         <div className="flex flex-col items-center mt-5 mb-2">
-                        <p className="mb-2 font-medium pt-5">Correct Answers: {correctCount}</p>
-                        <button
-                            className="bg-[#13974c] text-white font-semibold px-4 py-2 rounded hover:bg-[#0dc55d]"
-                            onClick={() => setShowPopup(false)}
-                        >
-                            Close
-                        </button>
+                            <p className="mb-2 font-medium pt-5">
+                                Correct Answers: {correctCount}
+                            </p>
+                            <button
+                                className="bg-[#13974c] text-white font-semibold px-4 py-2 rounded hover:bg-[#0dc55d]"
+                                onClick={() =>
+                                    navigate(`/contentshow/${course_id}`)
+                                }
+                            >
+                                Close
+                            </button>
                         </div>
                     </div>
                 </div>
