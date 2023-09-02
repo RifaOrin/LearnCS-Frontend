@@ -146,7 +146,8 @@ function ContentShow() {
                         course_id +
                         "/module/" +
                         expandedModuleId +
-                        "/pdf/"
+                        "/pdf/",
+                        
                 )
                 .then((response) => {
                     //console.log(expandedModuleId);

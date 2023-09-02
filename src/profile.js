@@ -10,6 +10,7 @@ import Chaticon from "./chatIcon";
 
 const Userurl = "https://kasifzisan.pythonanywhere.com/auth/users/me/";
 const baseUrl = `https://kasifzisan.pythonanywhere.com/user/`;
+const url = "https://kasifzisan.pythonanywhere.com/course/";
 function Profile() {
     //const { id } = useParams();
     const navigate = useNavigate();
@@ -27,6 +28,8 @@ function Profile() {
     const [showEnrolledCourses, setShowEnrolledCourses] = useState(false);
     const numberOfCourses = enrollcourse.length;
     const [showProfileInfo, setShowProfileInfo] = useState(true);
+    const [courseIds, setCourseIds] = useState([]);
+    const [courseInstructors, setCourseInstructors] = useState([]);
     const isLoggedIn = !!userid;
     const Access = localStorage.accessToken;
 
@@ -69,6 +72,9 @@ function Profile() {
                     .get(baseUrl + response.data.id + "/enrolledCourses/")
                     .then((response) => {
                         setEnrollcourse(response.data);
+
+                        const ids = response.data.map((course) => course.id);
+                        setCourseIds(ids);
                     });
             })
             .catch((error) => {
@@ -77,6 +83,32 @@ function Profile() {
                 }
             });
     }, [Access, navigate]);
+
+    useEffect(() => {
+        const fetchInstructorsSequentially = async () => {
+            const instructorInfoArray = [];
+
+            for (const courseId of courseIds) {
+                try {
+                    const response = await axios.get(
+                        `${url}${courseId}/instructor`
+                    );
+                    const instructorName = response.data[0].name;
+                    instructorInfoArray.push({ courseId, instructorName });
+                    setCourseInstructors(instructorInfoArray);
+                } catch (error) {
+                    console.error(
+                        `Error fetching instructor data for course ID ${courseId}:`,
+                        error
+                    );
+                }
+            }
+        };
+
+        if (courseIds.length > 0) {
+            fetchInstructorsSequentially();
+        }
+    }, [courseIds]);
 
     const toggleProfileInfo = () => {
         setShowProfileInfo(true);
@@ -194,41 +226,65 @@ function Profile() {
 
                     {showEnrolledCourses && (
                         <div className="ml-10 grid grid-cols-1 lg:grid-cols-3">
-                            {/* <ul> */}
-                            {enrollcourse.map((course) => (
-                                // <li key={course.id}>
-                                <Link
-                                    to={`/courseDetails/${course.id}#courseDetailsStart`}
-                                    className="card-link"
-                                >
-                                    <div className="card mt-10 hover:scale-105 transform transition-transform duration-300">
-                                        <div className="image-container h-40">
-                                            <img
-                                                className="w-full h-full object-cover"
-                                                src={course.cover_photo}
-                                                alt={course.title}
-                                            />
-                                        </div>
+                            {enrollcourse.map((course) => {
+                                const instructorInfo = courseInstructors.find(
+                                    (info) => {
+                                        if (info) {
+                                            console.log(
+                                                "Comparing:",
+                                                info.courseId,
+                                                course.id
+                                            );
+                                            return info.courseId === course.id;
+                                        }
+                                        return false;
+                                    }
+                                );
+                                const instructorName = instructorInfo
+                                    ? instructorInfo.instructorName
+                                    : "Unknown Instructor";
 
-                                        <div className="p-5 flex flex-col gap-3">
-                                            <div className="flex items-center justify-between">
-                                                <span className="badge">
-                                                    72 students
-                                                </span>
-                                                <span className="badge">
-                                                    1hr 13min
-                                                </span>
+                                return (
+                                    <Link
+                                        to={`/courseDetails/${course.id}#courseDetailsStart`}
+                                        className="card-link"
+                                        key={course.id}
+                                    >
+                                        <div className="card mt-10 hover:scale-105 transform transition-transform duration-300">
+                                            <div className="image-container h-40">
+                                                <img
+                                                    className="w-full h-full object-cover"
+                                                    src={course.cover_photo}
+                                                    alt={course.title}
+                                                />
                                             </div>
-
-                                            <h2 className="course-title">
-                                                <span>{course.title}</span>
-                                            </h2>
+                                            <div className="p-5 flex flex-col gap-3">
+                                                <div className="flex items-center justify-between">
+                                                    <span className="badge">
+                                                        {course.students.length}{" "}
+                                                        student
+                                                        {course.students
+                                                            .length !== 1
+                                                            ? "s"
+                                                            : ""}
+                                                    </span>
+                                                    <span className="badge">
+                                                        1hr 13min
+                                                    </span>
+                                                </div>
+                                                <h2 className="course-title">
+                                                    <span>{course.title}</span>
+                                                </h2>
+                                                <div className="mt-5 flex gap-2">
+                                                    <span className="course-instructor">
+                                                        {instructorName}
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </Link>
-                                // </li>
-                            ))}
-                            {/* </ul> */}
+                                    </Link>
+                                );
+                            })}
                         </div>
                     )}
                 </div>

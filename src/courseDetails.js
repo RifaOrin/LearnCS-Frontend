@@ -446,7 +446,9 @@ function CourseDetails() {
                                                         <span
                                                             className="cursor-pointer"
                                                             onClick={
-                                                                handleEnrollmentPopup
+                                                                isLoggedIn
+                                                                    ? handleEnrollmentPopup
+                                                                    : handleLoginPopup
                                                             }
                                                         >
                                                             {item.title}
@@ -485,7 +487,9 @@ function CourseDetails() {
                                                         <span
                                                             className="cursor-pointer"
                                                             onClick={
-                                                                handleEnrollmentPopup
+                                                                isLoggedIn
+                                                                    ? handleEnrollmentPopup
+                                                                    : handleLoginPopup
                                                             }
                                                         >
                                                             {item.title}
@@ -524,7 +528,9 @@ function CourseDetails() {
                                                         <span
                                                             className="cursor-pointer"
                                                             onClick={
-                                                                handleEnrollmentPopup
+                                                                isLoggedIn
+                                                                    ? handleEnrollmentPopup
+                                                                    : handleLoginPopup
                                                             }
                                                         >
                                                             {item.quiz_title}

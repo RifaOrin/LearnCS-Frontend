@@ -9,12 +9,41 @@ const url = "https://kasifzisan.pythonanywhere.com/course/";
 function SearchResult() {
     const { searchValue } = useParams();
     const [courses, setCourses] = useState([]);
+    const [courseIds, setCourseIds] = useState([]);
+    const [courseInstructors, setCourseInstructors] = useState([]);
 
     useEffect(() => {
         axios.get(url + `?search=${searchValue}`).then((response) => {
             setCourses(response.data);
+
+            const ids = response.data.map(course => course.id);
+            setCourseIds(ids);
         });
     });
+
+    useEffect(() => {
+        const fetchInstructorsSequentially = async () => {
+            const instructorInfoArray = [];
+    
+            for (const courseId of courseIds) {
+                try {
+                    const response = await axios.get(`${url}${courseId}/instructor`);
+                    const instructorName = response.data[0].name;
+                    instructorInfoArray.push({ courseId, instructorName });
+                    setCourseInstructors(instructorInfoArray);
+                } catch (error) {
+                    console.error(`Error fetching instructor data for course ID ${courseId}:`, error);
+                }
+            }
+    
+            
+        };
+    
+        if (courseIds.length > 0) {
+            fetchInstructorsSequentially();
+        }
+    }, [courseIds]);
+
     return (
         <body className="bg-[#F2F2F2] min-h-screen">
             <Navbar />
@@ -28,7 +57,15 @@ function SearchResult() {
                 
                 <div className="course-list grid grid-cols-3 gap-3 -mx-3">
                     {courses.map((course) => {
-                        const { id, title, cover_photo } = course;
+                        const { id, title, cover_photo,students } = course;
+                        const instructorInfo = courseInstructors.find(info => {
+                            if (info) {
+                                console.log("Comparing:", info.courseId, id);
+                                return info.courseId === id;
+                            }
+                            return false;
+                        });
+                        const instructorName = instructorInfo ? instructorInfo.instructorName : "Unknown Instructor";
                         return (
                             <div key={id}>
                                 <Link
@@ -47,7 +84,7 @@ function SearchResult() {
                                         <div className="p-5 flex flex-col gap-3">
                                             <div className="flex items-center justify-between">
                                                 <span className="badge">
-                                                    72 students
+                                                {students.length} student{students.length !== 1 ? 's' : ''}
                                                 </span>
                                                 <span className="badge">
                                                     1hr 13min
@@ -59,10 +96,10 @@ function SearchResult() {
                                             </h2>
 
                                             <div className="mt-5 flex gap-2">
-                                                <span className="course-instructor">
-                                                    <p>{}</p>
-                                                </span>
-                                            </div>
+                                                    <span className="course-instructor">
+                                                        {instructorName}
+                                                    </span>
+                                                </div>
                                         </div>
                                     </div>
                                 </Link>
