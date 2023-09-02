@@ -20,7 +20,9 @@ function About(){
         <body id="aboutUsStart">
             <div class="bg-gray-50 min-h-screen px-24">
                 <div className="flex items-center justify-between pt-24">
+                    <Link to = "/">
                     <h1 className="text-3xl font-medium text-black">Learn<span className="text-3xl text-[#55D98E] font-medium">CS</span></h1>
+                    </Link>
                     <div className="ml-auto">
                         <Link to= "/login">
                         <button className="px-6 py-2 bg-[#39df81] hover:bg-[#16ad58] rounded-lg text-white text-lg font-semibold mr-5">Login</button>

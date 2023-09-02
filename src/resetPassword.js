@@ -15,7 +15,6 @@ function ResetPass() {
         try {
             const resp = await axios.post(Url, { email });
             navigate("/resetPassConfirmation");
-            
         } catch (error) {
             if (error.response.data.email !== undefined) {
                 alert(error.response.data.email);
@@ -66,20 +65,22 @@ function ResetPass() {
                         <p className="text-center text-lg text-gray-800 font-semibold mb-4">
                             Please check your email .
                         </p>
-                        <button
-                            className="block w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded"
-                            onClick={() => setShowPopup(false)}
-                        >
-                            Close
-                        </button>
+                        <Link to="/resetPassConfirmation">
+                            <button
+                                className="block w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded"
+                                onClick={() => setShowPopup(false)}
+                            >
+                                Close
+                            </button>
+                        </Link>
                     </div>
                 </div>
             )}
             {isLoading && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
-        </div>
-      )}
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
+                </div>
+            )}
         </body>
     );
 }
