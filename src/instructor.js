@@ -139,7 +139,7 @@ function Instructor() {
                                             <div className="p-5 flex flex-col gap-3">
                                                 <div className="flex items-center justify-between">
                                                     <span className="badge">
-                                                        72 students
+                                                    {Instructorcourses.students.length} student{Instructorcourses.students.length !== 1 ? 's' : ''}
                                                     </span>
                                                     <span className="badge">
                                                         1hr 13min

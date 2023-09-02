@@ -2,26 +2,29 @@ import { useState } from "react";
 import Background from "./images/background.jpg";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-const Url = "https://kasifzisan.pythonanywhere.com/auth/users/reset_password_confirm/";
+const Url =
+    "https://kasifzisan.pythonanywhere.com/auth/users/reset_password_confirm/";
 function ResetPassConfirm() {
     const [uid, setUid] = useState("");
     const [token, setToken] = useState("");
-    const [newpass , setNewpass] = useState("");
+    const [new_password, setNewpass] = useState("");
     const navigate = useNavigate();
     const [showPopup, setShowPopup] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const resetdata = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         try {
-            const resp = await axios.post(Url, { uid, token, newpass });
+            const resp = await axios.post(Url, { uid, token, new_password });
             //navigate("");
             setShowPopup(true);
-        } 
-        catch (error) {
+        } catch (error) {
             if (error.response.data.email !== undefined) {
                 alert(error.response.data.email);
             }
         }
+        setIsLoading(false);
     };
     return (
         <body>
@@ -46,7 +49,7 @@ function ResetPassConfirm() {
                                 onChange={(e) => setUid(e.target.value)}
                                 required
                             />
-                             <input
+                            <input
                                 className="p-2 mt-8 rounded-xl border outline-none focus:border-2 focus:border-[#5E6055] bg-[#f3f7fa]"
                                 type="text"
                                 name="Token"
@@ -77,19 +80,24 @@ function ResetPassConfirm() {
                     </div>
                 </div>
             </section>
+            {isLoading && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-500"></div>
+                </div>
+            )}
             {showPopup && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
                     <div className="bg-white rounded-lg p-8 max-w-sm mx-auto shadow-lg">
                         <p className="text-center text-lg text-gray-800 font-semibold mb-4">
                             Your Password has been Reset Please login
                         </p>
-                        <Link to = "/login">
-                        <button
-                            className="block w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded"
-                            onClick={() => setShowPopup(false)}
-                        >
-                            Login
-                        </button>
+                        <Link to="/login">
+                            <button
+                                className="block w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded"
+                                onClick={() => setShowPopup(false)}
+                            >
+                                Login
+                            </button>
                         </Link>
                     </div>
                 </div>
